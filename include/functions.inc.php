@@ -214,6 +214,39 @@ function getAllUsers($conn)
     return $allUsers;
 }
 
+function getAllTickets($conn)
+{
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt, "SELECT * FROM tickets;"))
+    {
+        header("location: ../signup.php?error=stmtFailed");
+        exit();
+    }
+    mysqli_stmt_execute($stmt);
+
+    $resultTickets = mysqli_stmt_get_result($stmt);
+    $allTickets = array();
+    while($row = mysqli_fetch_assoc($resultTickets))
+    {
+        $ticket['id'] = $row["id"];
+        $ticket['title'] = $row["title"];
+        $ticket['image'] = $row["file_path"];
+        $ticket['comment'] = $row["comment"];
+        $ticket['user_id'] = $row["user_id"];
+        $ticket['ticketStatus'] = $row["ticketStatus"];
+        $ticket['created'] = $row["created"];
+
+        $allTickets[$ticket['id']] = $ticket;
+
+    }
+
+    mysqli_stmt_close($stmt);
+
+
+
+    return $allTickets;
+}
+
 
 
 
