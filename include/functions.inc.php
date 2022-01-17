@@ -305,6 +305,27 @@ function userUid_by_userId($conn, $userId)
 
 }
 
+function editUserByAdmin($conn, $userId, $anrede, $lastname, $firstname, $email, $username, $typ, $status)
+{
+        $sql = "UPDATE users SET usersAnrede = ?, usersNachname = ?, usersVorname = ?, usersEmail = ?, usersUid = ?, usersTyp = ?, usersStatus = ?
+                WHERE usersId = $userId;";
+        $stmt = mysqli_stmt_init($conn);
+        if(!mysqli_stmt_prepare($stmt, $sql))
+        {
+            header("location: ../edit_user.php?usersId=". $existingUsersId ."&error=stmtFailed");
+            exit();
+        }
 
+        #Passwort wird gehashed
+        $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
+
+        mysqli_stmt_bind_param($stmt, "sssssss", $anrede, $lastname, $firstname ,$email, $username, $typ, $status);
+        
+        if(mysqli_stmt_execute($stmt)){
+            header("location: ../index.php?currPage=admin&error=none");
+        }
+        mysqli_stmt_close($stmt);
+        exit();    
+}
 
 
