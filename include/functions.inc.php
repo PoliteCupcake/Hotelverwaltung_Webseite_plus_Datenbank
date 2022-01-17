@@ -97,7 +97,7 @@ function createUser($conn, $anrede, $lastname, $firstname, $email, $username, $p
         #Passwort wird gehashed
         $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
 
-        mysqli_stmt_bind_param($stmt, "sssssss", $anrede, $lastname, $firstname ,$email, $username, $hashedPwd, $typ);
+        mysqli_stmt_bind_param($stmt, "sssssss", $anrede, $lastname, $firstname ,$email, $hashedPwd, $username, $typ);
         
         if(mysqli_stmt_execute($stmt)){
             header("location: ../index.php?error=none");
