@@ -60,6 +60,8 @@
                 //DO NOT leave that in 
                 case "admin": include "admin.php";
                     break;
+                case "loginNew": include "loginNew.php";
+                    break;
                 default: include "news.php";
             }
         }

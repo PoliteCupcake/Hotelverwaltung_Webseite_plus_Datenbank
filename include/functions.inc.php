@@ -135,18 +135,37 @@ function loginUser($conn, $username, $pwd)
 {
     $uidExists = uidExists($conn, $username, $username);
 
+
+
+
     if($uidExists === false)
     {
-        header("location: ../login.php?error=wronglogin");
+        header("location: ../index.php?currPage=loginNew&error=wronglogin");
         exit();
     }
 
     $pwdHashed = $uidExists["usersPassword"];
     $checkPwd = password_verify($pwd, $pwdHashed);
 
+    if($uidExists['usersStatus'] == 'active')
+    {
+        $checkActive = true;
+    }
+    else
+    {
+        $checkActive = false;
+    }
+
+
+
     if($checkPwd === false)
     {
-        header("location: ../login.php?error=wronglogin");
+        header("location: ../index.php?currPage=loginNew&error=wronglogin");
+        exit();
+    }
+    else if($checkActive !== true)
+    {
+        header('location: ../index.php?currPage=loginNew&error=inactive');
         exit();
     }
     else if($checkPwd === true)
@@ -159,9 +178,6 @@ function loginUser($conn, $username, $pwd)
        
     }
 }
-
-
-
 
 
 function getAllUsers($conn)
