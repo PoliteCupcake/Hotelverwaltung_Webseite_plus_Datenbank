@@ -1,8 +1,8 @@
 <?php
     function CheckUserLevel(){ #git test
         // get level from database
-        if(isset($_SESSION["UserLevel"])){ 
-            switch($_SESSION["UserLevel"]){
+        if(isset($_SESSION["role"])){ 
+            switch($_SESSION["role"]){
                 case "guest": return 1;
                     break;
                 case "service": return 2;

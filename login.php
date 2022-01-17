@@ -3,20 +3,6 @@
       session_start();
   }
   
-/*
-  if($_SERVER["REQUEST_METHOD"] == "POST"){
-      if(
-          $_POST["EmailLogin"] === "Musterman" &&
-          $_POST["PasswortLogin"] === "PasswortMuster"
-      ) {
-          $_SESSION["Username"] = $_POST["EmailLogin"];
-          $_SESSION["UserLevel"] = "guest";
-          header("Location: https://127.0.0.1/Biegler_Semesterprojektv2/index.php");
-          $status = "Your logged in!";
-          exit($status);
-      }
-  }
-*/
 ?>
 
 <div id="LoginCardContainer" class="position-absolute end-0 container-md">

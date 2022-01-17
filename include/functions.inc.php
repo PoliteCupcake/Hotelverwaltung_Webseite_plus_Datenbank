@@ -82,11 +82,11 @@ function uidExists($conn, $username, $email)
 }
 
 
-function createUser($conn, $anrede, $lastname, $firstname, $email, $username, $pwd, $typ)
+function createUser($conn, $anrede, $lastname, $firstname, $email, $username, $pwd, $typ, $status)
 {
     $checkIfSame = uidExists($conn, $username, $email);
     if($checkIfSame === false){
-        $sql = "INSERT INTO  users (usersAnrede, usersNachname, usersVorname, usersEmail, usersPassword, usersUid, usersTyp) VALUES (?, ?, ?, ?, ?, ?, ?);"; 
+        $sql = "INSERT INTO  users (usersAnrede, usersNachname, usersVorname, usersEmail, usersPassword, usersUid, usersTyp, usersStatus) VALUES (?, ?, ?, ?, ?, ?, ?, ?);"; 
         $stmt = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt, $sql))
         {
@@ -97,7 +97,7 @@ function createUser($conn, $anrede, $lastname, $firstname, $email, $username, $p
         #Passwort wird gehashed
         $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
 
-        mysqli_stmt_bind_param($stmt, "sssssss", $anrede, $lastname, $firstname ,$email, $hashedPwd, $username, $typ);
+        mysqli_stmt_bind_param($stmt, "ssssssss", $anrede, $lastname, $firstname ,$email, $hashedPwd, $username, $typ, $status);
         
         if(mysqli_stmt_execute($stmt)){
             header("location: ../index.php?error=none");
@@ -188,7 +188,7 @@ function getAllUsers($conn)
      $user['pwd'      ] = $row["usersPassword"];
      $user['username' ] = $row["usersUid"     ];
      $user['role'     ] = $row["usersTyp"     ];
-
+     $user['status'   ] = $row["usersStatus"  ];
      
      $allUsers[$user['usersId']] = $user;
   }

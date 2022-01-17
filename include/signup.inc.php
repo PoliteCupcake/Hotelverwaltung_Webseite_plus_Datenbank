@@ -7,7 +7,7 @@ include_once "functions.inc.php";
 include_once "dbaccess.inc.php";
 
 //$inputArr = array($anrede, $firstname, $lastname, $email, $username, $pwd, $pwdRepeat);
-$stringInputArr = array("anrede", "firstname", "lastname", "email", "username", "pwd", "pwdRepeat");
+$stringInputArr = array("firstname", "lastname", "email", "username", "pwd", "pwdRepeat");
 $inputAlph = array("lastname", "firstname");
 
 $UserData = array();
@@ -62,8 +62,10 @@ if(isset($_POST["submit"]))
     $pwd = $_POST["pwd"];
     $pwdRepeat = $_POST["pwdRepeat"];
     // typ can only be changed by admin!!
-    $typ = "guest";
-    createUser($conn, $anrede, $firstname, $lastname, $email, $username, $pwd, $typ);
+    $typ = "guest";         //Options: anonym, guest, service, admin
+    $status = "active";      //Options: active, inactive
+
+    createUser($conn, $anrede, $firstname, $lastname, $email, $username, $pwd, $typ, $status);
 }
 
 
