@@ -1,0 +1,173 @@
+<?php
+// Sign up checks and value setting--------------------------------------------------
+// ----------------------------------------------------------------------------------
+function checkInput($data){
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+
+function checkForAlph($input){
+    return preg_match("/^[a-zA-Z]*$/", $input) ? "" : "Nur Buchstaben!";
+}
+function checkForNum($input){
+    return preg_match("/^[0-9]*$/", $input) ? "" : "Nur Zahlen!";
+}
+function checkForAlphNum($input){
+    return preg_match("/^[a-zA-Z0-9]*$/", $input) ? "" : "Keine Sonderzeichen!";
+}
+function checkEmail($input){
+    return filter_var($input, FILTER_VALIDATE_EMAIL) ? "" : "Adresse ungültig!";
+}
+
+
+
+function pwdMatch($pwd, $pwdRepeat)
+{
+    $result;
+    if($pwd !== $pwdRepeat){
+        $result = true;
+    }
+    else{
+                $result = false;
+    }
+    return $result;
+}
+
+function SetValue($input, $error){
+    if($error == ""){
+        echo $input;
+    }
+    else{
+        echo $input = "";
+    }
+}
+
+function signUpError($inputArr, $ErrorArr){
+    foreach($inputArr as $input){
+        if($ErrorArr[$input] != ""){
+            return true;
+        }
+    }
+}
+
+// Server functions signup page -----------------------------------------------------
+// ----------------------------------------------------------------------------------
+function uidExists($conn, $username, $email)
+{
+    $sql = "SELECT * FROM users WHERE usersUid = ? OR usersEmail = ?;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt, $sql))
+    {
+        header("location: https://127.0.0.1/Biegler_Semesterprojektv2/signup.php?error=stmtFailed");
+        exit();
+    }
+    
+    mysqli_stmt_bind_param($stmt, "ss", $username, $email);
+    mysqli_stmt_execute($stmt);
+
+    $resultData = mysqli_stmt_get_result($stmt);
+
+    if($row = mysqli_fetch_assoc($resultData))
+    {
+        return  $row;
+    }
+    else
+    {
+        $result = false;
+        return $result;
+    }
+
+    mysqli_stmt_close($stmt);
+}
+
+
+function createUser($conn, $anrede, $lastname, $firstname, $email, $username, $pwd, $typ)
+{
+    $checkIfSame = uidExists($conn, $username, $email);
+    if($checkIfSame === false){
+        $sql = "INSERT INTO  users (usersAnrede, usersNachname, usersVorname, usersEmail, usersPassword, usersUid, usersTyp) VALUES (?, ?, ?, ?, ?, ?, ?);"; 
+        $stmt = mysqli_stmt_init($conn);
+        if(!mysqli_stmt_prepare($stmt, $sql))
+        {
+            header("location: https://127.0.0.1/Biegler_Semesterprojektv2/index.php?currPage=signup&error=stmtFailed");
+            exit();
+        }
+
+        #Passwort wird gehashed
+        $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
+
+        mysqli_stmt_bind_param($stmt, "sssssss", $anrede, $lastname, $firstname ,$email, $username, $hashedPwd, $typ);
+        
+        if(mysqli_stmt_execute($stmt)){
+            header("location: https://127.0.0.1/Biegler_Semesterprojektv2/index.php?error=none");
+        }
+        mysqli_stmt_close($stmt);
+        exit();    
+    }
+    else{
+        header("location: https://127.0.0.1/Biegler_Semesterprojektv2/index.php?currPage=signup&error=userExists");
+    }
+
+}
+
+// Login function  ------------------------------------------------------------------
+// ----------------------------------------------------------------------------------
+
+function emptyInputLogin($username, $pwd)
+{
+    $result;
+
+    if(empty($username) || empty($pwd))
+    {
+        $result = true;
+    }
+    else
+    {
+        $result = false;
+    }
+
+    return $result;
+}
+
+
+function loginUser($conn, $username, $pwd)
+{
+    $uidExists = uidExists($conn, $username, $username);
+
+    if($uidExists === false)
+    {
+        header("location: https://127.0.0.1/Biegler_Semesterprojektv2/login.php?error=wronglogin");
+        exit();
+    }
+
+    $pwdHashed = $uidExists["usersPassword"];
+    $checkPwd = password_verify($pwd, $pwdHashed);
+
+    if($checkPwd === false)
+    {
+        header("location: https://127.0.0.1/Biegler_Semesterprojektv2/login.php?error=wronglogin");
+        exit();
+    }
+    else if($checkPwd === true)
+    {
+        session_start();
+        $_SESSION["userid"] = $uidExists["usersId"] ;
+        $_SESSION["useruid"] = $uidExists["usersUid"];
+        header("location: https://127.0.0.1/Biegler_Semesterprojektv2/index.php");
+        exit();
+       
+    }
+}
+
+
+
+
+
+
+
+
+
+

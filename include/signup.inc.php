@@ -1,0 +1,63 @@
+<?php
+session_start();
+
+// https://127.0.0.1/Biegler_Semesterprojektv2
+
+include_once "functions.inc.php";
+include_once "dbaccess.inc.php";
+
+//$inputArr = array($anrede, $firstname, $lastname, $email, $username, $pwd, $pwdRepeat);
+$stringInputArr = array("anrede", "firstname", "lastname", "email", "username", "pwd", "pwdRepeat");
+$inputAlph = array("lastname", "firstname");
+
+$UserData = array();
+$ErrorArr = array();
+
+foreach($stringInputArr as $input){
+    $UserData[$input] = "";
+    $ErrorArr[$input] = ""; 
+ } 
+
+
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+
+    foreach($stringInputArr as $input){
+        $UserData[$input] = checkInput($_POST[$input]);
+
+        if($UserData[$input] == ""){
+            $ErrorArr[$input] = 'Bitte ausfüllen!'; 
+        }
+        else{
+            $ErrorArr["username"] = checkForAlphNum($UserData["username"]);
+            $ErrorArr["email"] = checkEmail($UserData["email"]);
+        }
+    }
+    foreach($inputAlph as $input){
+        $Errors[$input] = checkForAlph($UserData[$input]);
+    }
+}
+$_SESSION["signUpErrors"] = $ErrorArr;
+
+if(signUpError($stringInputArr, $ErrorArr)){
+    header("location: https://127.0.0.1/Biegler_Semesterprojektv2/index.php?currPage=signup&inputError=notready");
+    exit(); 
+}
+
+if(isset($_POST["submit"]))
+{   
+    $anrede = $_POST["anrede"];
+    $lastname = $_POST["lastname"];
+    $firstname = $_POST["firstname"];
+    $email = $_POST["email"];
+    $username = $_POST["username"];
+    $pwd = $_POST["pwd"];
+    $pwdRepeat = $_POST["pwdRepeat"];
+    // typ can only be changed by admin!!
+    $typ = "guest";
+    createUser($conn, $anrede, $firstname, $lastname, $email, $username, $pwd, $typ);
+}
+
+
+

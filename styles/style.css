@@ -1,0 +1,101 @@
+/* General styles (found on most pages)*/
+header{
+    background-color: rgb(50, 50, 50);
+}
+body{
+    background-color:  rgb(230, 230, 230);
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+.PageWrap{
+    margin-left: 5%;
+    margin-right: 5%;
+}
+h2{
+    text-align: center;
+}
+.PageContent{
+    background-color: white;
+    padding: 10px;
+    border:  1px solid black;
+    border-radius: 10px;
+    margin: 10px;
+}
+.PageContent, p{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+/*-------------------------------------------------------------------*/
+
+/* mediaquery */
+/* If smaller than md-breakpoint then... */
+@media only screen and (max-width: 768px){
+    .NewsContent .col-md-8{
+        border: 0;
+    }
+}
+/* If bigger than md-breakpoint then... */
+@media only screen and (min-width: 768px){
+    .nav-item{
+        border-right: 1px solid lightgray;
+    }
+}
+/*-------------------------------------------------------------------*/
+
+
+/* Specific page styles*/
+
+/* navbar */
+
+
+/* Impressum styles */
+#imgPersonal img{
+    border-top: 1px solid white;
+    border-top-right-radius: 40px;
+}
+#fixedsize{
+    width: 100%;
+    max-width: 800px;
+}
+
+
+/* Login form styles */
+#LoginCardContainer{
+    max-width: 768px;
+}
+
+
+/* Profile styles */
+#TicketUploadContainer{
+    max-width: 1000px;
+}
+
+
+/* Registry styles */
+form .col{
+    text-align: end;
+    padding: 5px;
+}
+    /* durch flex stacken die Elemente wie gewünscht */
+form .col{
+    min-width: 300px;
+}
+#OrderForms{
+    max-width: 900px;
+}
+
+
+/* Footer styles */
+.socialFb{
+    width: 50px;
+}
+.footer{
+
+    color: white;
+    background-color: rgb(50, 50, 50);
+    border-top: 1px solid black;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 12px;
+}
