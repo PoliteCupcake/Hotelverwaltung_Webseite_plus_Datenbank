@@ -164,7 +164,39 @@ function loginUser($conn, $username, $pwd)
 
 
 
+function getAllUsers($conn)
+{
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt, "SELECT * FROM users;"))
+    {
+        header("location: ../signup.php?error=stmtFailed");
+        exit();
+    }
+    
+    mysqli_stmt_execute($stmt);
 
+    $resultData = mysqli_stmt_get_result($stmt);
+  /* fetch associative array */
+  $allUsers = array();
+  while ($row = mysqli_fetch_assoc($resultData))
+  {
+     $user['usersId'  ] = $row["usersId"      ];
+     $user['anrede'   ] = $row["usersAnrede"  ];
+     $user['lastname' ] = $row["usersNachname"];
+     $user['firstname'] = $row["usersVorname" ];
+     $user['email'    ] = $row["usersEmail"   ];
+     $user['pwd'      ] = $row["usersPassword"];
+     $user['username' ] = $row["usersUid"     ];
+     $user['role'     ] = $row["usersTyp"     ];
+
+     
+     $allUsers[$user['usersId']] = $user;
+  }
+
+    mysqli_stmt_close($stmt);
+
+    return $allUsers;
+}
 
 
 

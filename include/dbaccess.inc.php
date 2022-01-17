@@ -13,6 +13,5 @@ if(!$conn)
 }
 else
 {
-    var_dump($conn);
-    echo "Sucessfully connected to DB";
+    //echo "Sucessfully connected to DB";
 }

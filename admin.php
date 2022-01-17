@@ -1,67 +1,46 @@
 <?php
-
-
+   include_once "include/dbaccess.inc.php";
+   include_once "include/functions.inc.php";
 ?>
 
 <div class="PageWrap">
+
     <h1>Admin</h1>
+
     <p>ACHTUNG! Einige Änderungen die auf dieser Seite vorgenommen werden haben eventuell Folgen für die Benutzer!</p>
-    <div class="PageContent">
+
+<!--    <div class="PageContent">
         <h2>Neuen User anlegen</h2>
-        <?php include_once "signup.php"; ?>
-    </div>
+    </div> -->
+
     <div class="PageContent">
-        <h2>Usertyp: Gast</h2>
+        <h2>Liste aller registrierter User</h2>
         <table class="table table-bordered table-dark">
             <thead> <!-- Table head -->
                 <tr>
-                    <th scope="col">UserID</th>
-                    <th scope="col">Name</th>
                     <th scope="col">Username</th>
-                    <th scope="col">E-Mail</th>
-                    <th scope="col"></th>
+                    <th scope="col">Vorname, Nachname</th>
+                    <th scope="col">Rolle</th>
+                    <th scope="col">Aktionen</th>
                 </tr>
             </thead>
             <!-- Table content procedurally made from DB -->
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td><a href="#">Bearbeiten</a></td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td><a href="#">Bearbeiten</a></td>
-                </tr>
+
+             <?php
+                 $allUsers = getAllUsers($conn);
+		 foreach($allUsers as $user)
+                 {
+                    echo '<tr>';
+                    echo '<td>'. $user['username'] .'</td>';
+                    echo '<td>'. $user['firstname'] . ' ' . $user['lastname'] .'</td>';
+                    echo '<td>'. $user['role'] .'</td>';
+                    echo '<td>[ <a href="edit_user.php?usersId='. $user['usersId'] .'">bearbeiten</a> ]</td>';
+                 }
+              ?>
+
             </tbody>
         </table>
     </div>
 
-    <div class="PageContent">
-        <h2>Usertyp: Servicetechniker</h2>
-        <table class="table table-striped table-dark">
-            <thead> <!-- Table head -->
-                <tr>
-                    <th scope="col">UserID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">E-Mail</th>
-                </tr>
-            </thead>
-            <!-- Table content procedurally made from DB -->
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
 </div>
