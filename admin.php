@@ -8,7 +8,7 @@
     <h1>Admin</h1>
 
     <p>ACHTUNG! Einige Änderungen die auf dieser Seite vorgenommen werden haben eventuell Folgen für die Benutzer!</p>
-
+    <a href="index.php?currPage=create_user">Neuen User erstellen!</a>     
 <!--    <div class="PageContent">
         <h2>Neuen User anlegen</h2>
     </div> -->

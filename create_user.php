@@ -1,29 +1,11 @@
-<?php 
-    if(!isset($_SESSION)){
-        session_start();
-    }
-    
-    $ErrorArr = $_SESSION["signUpErrors"];
-    require_once "include/functions.inc.php";
-    
-    if(isset($_GET["inputError"])){
-        echo "<p>error</p>";
-    }
-?>
-<!--
-<div class="container row pb-2">
-    <label class="col-md-4 text-md-end" for="Vorname">Neuer Vorname: </label>
-    <input class="col-md-6" type="text" name="Vorname">                        
-</div>
--->
-
-<div class="PageWrap">
-    <div class="PageContent">
-        <form action="include/signup.inc.php" method="post">
+<div class="PageContent">
+    <h2>Neuen Benutzer anlegen</h2>
+    <form action="include/create_user.inc.php" method="post">
             <div class="container row pb-2">
-                <label class="col-md-4 text-md-end" for="Anrede">Anrede: </label>
+                <label class="col-md-4 text-md-end" for="anrede">Anrede: </label>
                 <select class="col-md-6" name="anrede" id="anrede">
                     <option selected name="anrede" value="">Keine Angabe</option>
+                    <!--changed: "User_Anrede" to "anrede" -->
                     <option name="anrede" value="Herr">Herr</option>
                     <option name="anrede" value="Frau">Frau</option>
                     <option name="anrede" value="Enby">Enby</option> 
@@ -53,13 +35,19 @@
                 <label class="col-md-4 text-md-end" for="pwdRepeat">Passwort wiederhgolen*:</label>
                 <input class="col-md-6" type="password" name="pwdRepeat" >
             </div>
+
+            <div class="container row pb-2">
+                <label class="col-md-4 text-md-end" for="role">Rolle: </label>
+                <select class="col-md-6" name="role" id="role">
+                    <option selected name="role" value="guest">Gast</option>
+                    <option name="role" value="service">Techniker</option>
+                </select>                
+            </div>
+            <div class="container row pb-2">
+                <label class="col-md-4 text-md-end" for="status">Aktiv: </label>
+                <input class="col-md-6" type="checkbox" name="status" checked>
+            </div>
             <button type="submit"  name="submit">Sign up </button>
 
         </form>
-    </div>
 </div>
-<?php
-
-?>
-</body>
-</html>

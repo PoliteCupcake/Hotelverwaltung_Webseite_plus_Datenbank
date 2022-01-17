@@ -1,8 +1,6 @@
 <?php
 session_start();
 
-
-
 include_once "functions.inc.php";
 include_once "dbaccess.inc.php";
 
@@ -63,7 +61,7 @@ if(isset($_POST["submit"]))
     $pwdRepeat = $_POST["pwdRepeat"];
     // typ can only be changed by admin!!
     $typ = "guest";         //Options: anonym, guest, service, admin
-    $status = "active";      //Options: active, inactive
+    $status = "active";     //Options: active, inactive
 
     createUser($conn, $anrede, $firstname, $lastname, $email, $username, $pwd, $typ, $status);
 }

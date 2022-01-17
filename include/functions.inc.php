@@ -111,6 +111,34 @@ function createUser($conn, $anrede, $lastname, $firstname, $email, $username, $p
 
 }
 
+function createUserByAdmin($conn, $anrede, $lastname, $firstname, $email, $username, $pwd, $typ, $status)
+{
+    $checkIfSame = uidExists($conn, $username, $email);
+    if($checkIfSame === false){
+        $sql = "INSERT INTO  users (usersAnrede, usersNachname, usersVorname, usersEmail, usersPassword, usersUid, usersTyp, usersStatus) VALUES (?, ?, ?, ?, ?, ?, ?, ?);"; 
+        $stmt = mysqli_stmt_init($conn);
+        if(!mysqli_stmt_prepare($stmt, $sql))
+        {
+            header("location: ../index.php?currPage=create_user&error=stmtFailed");
+            exit();
+        }
+
+        #Passwort wird gehashed
+        $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
+
+        mysqli_stmt_bind_param($stmt, "ssssssss", $anrede, $lastname, $firstname ,$email, $hashedPwd, $username, $typ, $status);
+        
+        if(mysqli_stmt_execute($stmt)){
+            header("location: ../index.php?currPage=create_user&error=none");
+        }
+        mysqli_stmt_close($stmt);
+        exit();    
+    }
+    else{
+        header("location: ../index.php?currPage=create_user&error=userExists");
+    }
+
+}
 // Login function  ------------------------------------------------------------------
 // ----------------------------------------------------------------------------------
 
