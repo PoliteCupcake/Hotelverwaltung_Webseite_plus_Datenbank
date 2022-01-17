@@ -1,5 +1,5 @@
 <?php
-    function CheckUserLevel(){
+    function CheckUserLevel(){ #git test
         // get level from database
         if(isset($_SESSION["UserLevel"])){ 
             switch($_SESSION["UserLevel"]){
