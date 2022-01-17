@@ -11,10 +11,15 @@ include_once "include/functions.inc.php";
         <table class="table table-bordered table-dark">
             <thead> <!-- Table head -->
             <tr>
-                <th scope="col">Username</th>
-                <th scope="col">Vorname, Nachname</th>
-                <th scope="col">Rolle</th>
-                <th scope="col">Aktionen</th>
+                <th scope="col">Tickenummer</th>
+                <th scope="col">Betreff</th>
+                <th scope="col">Bild</th>
+                <th scope="col">Text</th>
+                <th scope="col">Erstellt von</th>
+                <th scope="col">Ticketstatus</th>
+                <th scope="col">Erstellt</th>
+                <th scope="col">Bearbeiten</th>
+
             </tr>
             </thead>
             <!-- Table content procedurally made from DB -->
@@ -25,11 +30,17 @@ include_once "include/functions.inc.php";
             foreach($allTickets as $ticket)
             {
                 echo '<tr>';
-                echo '<td>'. $user['username'] .'</td>';
-                echo '<td>'. $user['firstname'] . ' ' . $user['lastname'] .'</td>';
-                echo '<td>'. $user['role'] .'</td>';
-                echo '<td>[ <a href="edit_user.php?usersId='. $user['usersId'] .'">bearbeiten</a> ]</td>';
+                echo '<td>'. $ticket['id'] .'</td>';
+                echo '<td>'. $ticket['title'] .'</td>';
+                echo '<td><img src="./' . $ticket['img_path'] . '" height=30></td>';
+                echo '<td>'. $ticket['comment'] .'</td>';
+                echo '<td>'. userUid_by_userId($conn,$ticket['user_id']) .'</td>';
+                echo '<td>'. $ticket['ticketStatus'] .'</td>';
+                echo '<td>'. $ticket['created'] .'</td>';
+
+                echo '<td>[ <a href="edit_user.php?user_id='. $ticket['user_id'] .'">bearbeiten</a> ]</td>';
                 echo '</tr>';
+
             }
             ?>
 

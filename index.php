@@ -58,6 +58,8 @@
                     break;
                 case "create_user": include "create_user.php";
                     break;
+                case "serviceTech": include "serviceTech.php";
+                    break;
                 default: include "news.php";
             }
         }

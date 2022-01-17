@@ -258,7 +258,7 @@ function getAllTickets($conn)
     {
         $ticket['id'] = $row["id"];
         $ticket['title'] = $row["title"];
-        $ticket['image'] = $row["file_path"];
+        $ticket['img_path'] = $row["file_path"];
         $ticket['comment'] = $row["comment"];
         $ticket['user_id'] = $row["user_id"];
         $ticket['ticketStatus'] = $row["ticketStatus"];
@@ -273,6 +273,36 @@ function getAllTickets($conn)
 
 
     return $allTickets;
+}
+
+function userUid_by_userId($conn, $userId)
+{
+    $stmt = mysqli_stmt_init($conn);
+
+    if(!mysqli_stmt_prepare($stmt, "SELECT usersUid FROM users WHERE usersId =" . $userId .";"))
+    {
+        header("location: ../signup.php?error=stmtFailed");
+        exit();
+    }
+
+    mysqli_stmt_execute($stmt);
+
+    $result_userUid = mysqli_stmt_get_result($stmt);
+
+    if($result_userUid === false )
+    {
+        return "unknown";
+    }
+    else
+    {
+
+        $row = mysqli_fetch_assoc($result_userUid);
+        $userUid = $row["usersUid"];
+
+    }
+
+    return $userUid;
+
 }
 
 
