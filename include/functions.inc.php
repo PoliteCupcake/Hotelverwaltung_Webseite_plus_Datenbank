@@ -22,8 +22,6 @@ function checkEmail($input){
     return filter_var($input, FILTER_VALIDATE_EMAIL) ? "" : "Adresse ungültig!";
 }
 
-
-
 function pwdMatch($pwd, $pwdRepeat)
 {
     $result;
@@ -31,7 +29,7 @@ function pwdMatch($pwd, $pwdRepeat)
         $result = true;
     }
     else{
-                $result = false;
+        $result = false;
     }
     return $result;
 }
@@ -61,7 +59,7 @@ function uidExists($conn, $username, $email)
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt, $sql))
     {
-        header("location: https://127.0.0.1/Biegler_Semesterprojektv2/signup.php?error=stmtFailed");
+        header("location: ../signup.php?error=stmtFailed");
         exit();
     }
     
@@ -92,7 +90,7 @@ function createUser($conn, $anrede, $lastname, $firstname, $email, $username, $p
         $stmt = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt, $sql))
         {
-            header("location: https://127.0.0.1/Biegler_Semesterprojektv2/index.php?currPage=signup&error=stmtFailed");
+            header("location: ../index.php?currPage=signup&error=stmtFailed");
             exit();
         }
 
@@ -102,13 +100,13 @@ function createUser($conn, $anrede, $lastname, $firstname, $email, $username, $p
         mysqli_stmt_bind_param($stmt, "sssssss", $anrede, $lastname, $firstname ,$email, $username, $hashedPwd, $typ);
         
         if(mysqli_stmt_execute($stmt)){
-            header("location: https://127.0.0.1/Biegler_Semesterprojektv2/index.php?error=none");
+            header("location: ../index.php?error=none");
         }
         mysqli_stmt_close($stmt);
         exit();    
     }
     else{
-        header("location: https://127.0.0.1/Biegler_Semesterprojektv2/index.php?currPage=signup&error=userExists");
+        header("location: ../index.php?currPage=signup&error=userExists");
     }
 
 }
@@ -139,7 +137,7 @@ function loginUser($conn, $username, $pwd)
 
     if($uidExists === false)
     {
-        header("location: https://127.0.0.1/Biegler_Semesterprojektv2/login.php?error=wronglogin");
+        header("location: ../login.php?error=wronglogin");
         exit();
     }
 
@@ -148,7 +146,7 @@ function loginUser($conn, $username, $pwd)
 
     if($checkPwd === false)
     {
-        header("location: https://127.0.0.1/Biegler_Semesterprojektv2/login.php?error=wronglogin");
+        header("location: ../login.php?error=wronglogin");
         exit();
     }
     else if($checkPwd === true)
@@ -156,7 +154,7 @@ function loginUser($conn, $username, $pwd)
         session_start();
         $_SESSION["userid"] = $uidExists["usersId"] ;
         $_SESSION["useruid"] = $uidExists["usersUid"];
-        header("location: https://127.0.0.1/Biegler_Semesterprojektv2/index.php");
+        header("location: ../index.php");
         exit();
        
     }

@@ -3,8 +3,7 @@
       session_start();
   }
   
-  // $UserType = array("Guest", "User", "Admin");  for later maybe?
-
+/*
   if($_SERVER["REQUEST_METHOD"] == "POST"){
       if(
           $_POST["EmailLogin"] === "Musterman" &&
@@ -17,6 +16,7 @@
           exit($status);
       }
   }
+*/
 ?>
 
 <div id="LoginCardContainer" class="position-absolute end-0 container-md">

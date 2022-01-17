@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// https://127.0.0.1/Biegler_Semesterprojektv2
+
 
 include_once "functions.inc.php";
 include_once "dbaccess.inc.php";
@@ -37,11 +37,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     foreach($inputAlph as $input){
         $Errors[$input] = checkForAlph($UserData[$input]);
     }
+    if(pwdMatch($UserData["pwd"], $UserData["pwdRepeat"])){
+        $ErrorArr["pwdRepeat"]= "";
+    }
+    else{
+        $ErrorArr["pwd"]= "Passwort beim wiederholen gescheitert";
+        $ErrorArr["pwdRepeat"]= "Passwort beim wiederholen gescheitert";
+    }
 }
 $_SESSION["signUpErrors"] = $ErrorArr;
 
 if(signUpError($stringInputArr, $ErrorArr)){
-    header("location: https://127.0.0.1/Biegler_Semesterprojektv2/index.php?currPage=signup&inputError=notready");
+    header("location: ../index.php?currPage=signup&inputError=notready");
     exit(); 
 }
 

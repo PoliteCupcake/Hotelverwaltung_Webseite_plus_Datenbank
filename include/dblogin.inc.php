@@ -10,7 +10,7 @@
 
         if(emptyInputLogin($username, $pwd) !== false)
         {
-            header("location: https://127.0.0.1/Biegler_Semesterprojektv2/login.php?error=emptyinput");
+            header("location: ../login.php?error=emptyinput");
             exit();
         }
 
@@ -18,6 +18,6 @@
     }
     else
     {
-        header("location: https://127.0.0.1/Biegler_Semesterprojektv2/login.php?error=emptyinput");
+        header("location: ../login.php?error=emptyinput");
         exit();
     }
