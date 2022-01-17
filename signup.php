@@ -23,10 +23,10 @@
             <div class="container row pb-2">
                 <label class="col-md-4 text-md-end" for="Anrede">Anrede: </label>
                 <select class="col-md-6" name="anrede" id="anrede">
-                    <option selected name="User_Anrede" value="">Keine Angabe</option>
-                    <option name="User_Anrede" value="Herr">Herr</option>
-                    <option name="User_Anrede" value="Frau">Frau</option>
-                    <option name="User_Anrede" value="Enby">Enby</option> 
+                    <option selected name="anrede" value="">Keine Angabe</option>
+                    <option name="anrede" value="Herr">Herr</option>
+                    <option name="anrede" value="Frau">Frau</option>
+                    <option name="anrede" value="Enby">Enby</option> 
                 </select>                
             </div>
             <div class="container row pb-2">
