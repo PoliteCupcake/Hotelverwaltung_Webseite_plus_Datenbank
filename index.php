@@ -49,18 +49,14 @@
                     break;
                 case "signup": include "signup.php";
                     break;
-                case "profile":             
-                    if(CheckUserLevel() == 1){
-                        include 'profile.php';
-                    }
-                    else{
-                        echo "Sie müssen sich zuerst einloggen!";
-                    }
+                case "profile": include 'profile.php';
                     break;
                 //DO NOT leave that in 
                 case "admin": include "admin.php";
                     break;
                 case "loginNew": include "loginNew.php";
+                    break;
+                case "create_user": include "create_user.php";
                     break;
                 default: include "news.php";
             }
