@@ -25,7 +25,7 @@ function checkEmail($input){
 function pwdMatch($pwd, $pwdRepeat)
 {
     $result;
-    if($pwd !== $pwdRepeat){
+    if($pwd === $pwdRepeat){
         $result = true;
     }
     else{
