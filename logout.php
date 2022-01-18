@@ -6,6 +6,7 @@
         $status = "Your logged out!";
         exit($status);
     }
+
 } 
 
 

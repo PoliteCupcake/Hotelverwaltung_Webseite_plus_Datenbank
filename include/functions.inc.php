@@ -100,10 +100,11 @@ function createUser($conn, $anrede, $lastname, $firstname, $email, $username, $p
         mysqli_stmt_bind_param($stmt, "ssssssss", $anrede, $lastname, $firstname ,$email, $hashedPwd, $username, $typ, $status);
         
         if(mysqli_stmt_execute($stmt)){
+            mysqli_stmt_close($stmt);
             header("location: ../index.php?error=none");
         }
         mysqli_stmt_close($stmt);
-        exit();    
+
     }
     else{
         header("location: ../index.php?currPage=signup&error=userExists");
@@ -305,6 +306,7 @@ function userUid_by_userId($conn, $userId)
 
 }
 
+
 function editUserByAdmin($conn, $userId, $anrede, $lastname, $firstname, $email, $username, $typ, $status)
 {
         $sql = "UPDATE users SET usersAnrede = ?, usersNachname = ?, usersVorname = ?, usersEmail = ?, usersUid = ?, usersTyp = ?, usersStatus = ?
@@ -315,6 +317,8 @@ function editUserByAdmin($conn, $userId, $anrede, $lastname, $firstname, $email,
             header("location: ../edit_user.php?usersId=". $existingUsersId ."&error=stmtFailed");
             exit();
         }
+
+
 
         #Passwort wird gehashed
         $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
@@ -329,3 +333,40 @@ function editUserByAdmin($conn, $userId, $anrede, $lastname, $firstname, $email,
 }
 
 
+function createTicket($conn, $file_path, $title, $comment, $user_id)
+{
+    $sql = "INSERT INTO tickets(file_path, title, comment, user_id) VALUES (?,?,?,?)";
+
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt, $sql))
+    {
+        header("location: ../index.php?currPage=profile&error=stmtFailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt,"ssss",$file_path, $title,$comment, $user_id);
+
+    if(mysqli_stmt_execute($stmt))
+    {
+        mysqli_stmt_close($stmt);
+        header("location: ../index.php?currPage=profile&error=none");
+    }
+
+    mysqli_stmt_close($stmt);
+
+}
+
+
+function guidv4($data = null) {
+    // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
+    $data = $data ?? random_bytes(16);
+    assert(strlen($data) == 16);
+
+    // Set version to 0100
+    $data[6] = chr(ord($data[6]) & 0x0f | 0x40);
+    // Set bits 6-7 to 10
+    $data[8] = chr(ord($data[8]) & 0x3f | 0x80);
+
+    // Output the 36 character UUID.
+    return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+}

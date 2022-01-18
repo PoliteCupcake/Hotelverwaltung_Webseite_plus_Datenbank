@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-include_once "functions.inc.php";
-include_once "dbaccess.inc.php";
+include_once "include/functions.inc.php";
+include_once "include/dbaccess.inc.php";
 
 //$inputArr = array($anrede, $firstname, $lastname, $email, $username, $pwd, $pwdRepeat);
 $stringInputArr = array("firstname", "lastname", "email", "username", "pwd", "pwdRepeat");
