@@ -1,3 +1,10 @@
+/*
+Rolle: Anon kann diese seite nicht erreichen;
+Rolle: Guest kann TIcket erstellen;
+Rolle: service kann Ticket erstellenl;
+Rolle: Admin kann Ticket erstellen;
+*/
+
 <?php
 
 include_once "functions.inc.php";

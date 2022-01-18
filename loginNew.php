@@ -1,4 +1,11 @@
+
+
+
 <?php
+/*
+kann nur von Rolle: Anon gesehen werden
+
+*/
 
 if(!isset($_SESSION)){
     session_start();

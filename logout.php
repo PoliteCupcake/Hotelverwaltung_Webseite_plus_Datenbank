@@ -1,9 +1,13 @@
+
+<?php
+
 /*
 durch rollen iterieren
 nur guest, service, admin können die funktionen sehen und nutzen
 */
 
-<?php
+
+
   if(isset($_GET["UserStatus"])){
     if($_GET["UserStatus"] == "logout"){
         session_unset();

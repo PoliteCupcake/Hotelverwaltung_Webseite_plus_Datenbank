@@ -30,7 +30,7 @@
         if(!isset($_SESSION["Username"])){
             include 'login.php';
         }
-        include 'logout.php';  
+       # include 'logout.php';
         // just a test
         if(isset($_SESSION["Username"])){
             echo $_SESSION["Username"];
@@ -62,7 +62,11 @@
                     break;
                 case "edit_user": include "edit_user.php"; // case: edit_user&
                     break;
+                case "myTickets" : include "myTickets.php";
+                    break;
+
                 default: include "news.php";
+
             }
         }
         else{

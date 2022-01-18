@@ -1,4 +1,7 @@
-<div class="PageWrap">       
+/*
+Jede Rolle kann diese Seite aufrufen;
+*/
+<div class="PageWrap">
 
 
 <h1>Sind noch Fragen da?</h1>
