@@ -14,7 +14,7 @@ $InputArr = array("file_path", "title", "comment");
 
 $uuid = guidv4();
 
-$target_dir = "C:\\xampp\\htdocs\\Gamsi_Biegi_Semesterprojekt\\ticketUploads\\";
+$target_dir = "..\\ticketUploads\\";
 $target_file = $target_dir . $uuid; #name !!!
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_dir . basename($_FILES["TicketUpload"]["name"]),PATHINFO_EXTENSION));

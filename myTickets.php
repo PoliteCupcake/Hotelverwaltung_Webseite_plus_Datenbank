@@ -18,7 +18,7 @@ if(isset($_SESSION["userid"])  )
 
     <div class="PageContent">
         <h2>Tickets</h2>
-
+        <a href="index.php?currPage=createTicket">Neues Ticket anlegen!</a>
         <table class="table table-bordered table-dark">
             <thead> <!-- Table head -->
             <tr>

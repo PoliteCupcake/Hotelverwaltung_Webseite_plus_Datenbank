@@ -11,7 +11,7 @@
         <?php
         include_once 'header.php';
 
-
+        // Login status if else 
         // echos content of the current page
         if(isset($_GET["currPage"])){
             switch($_GET["currPage"]){
@@ -40,6 +40,8 @@
                     break;
                 case "allTickets": include "allTickets.php";
                 case "allUsers": include "allUsers.php";
+                case "createTicket": include "createTicket.php";
+                    break;
                 case "createNews": include "createNews.php";
                     break;
                 case "logout": include "logout.php"; break;
