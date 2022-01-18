@@ -81,6 +81,59 @@ function uidExists($conn, $username, $email)
     mysqli_stmt_close($stmt);
 }
 
+function OnlyUidExists($conn, $username)
+{
+    $sql = "SELECT * FROM users WHERE usersUid = ?;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt, $sql))
+    {
+        header("location: ../signup.php?error=stmtFailedOnlyUidExists");
+        exit();
+    }
+    
+    mysqli_stmt_bind_param($stmt, "s", $username);
+    mysqli_stmt_execute($stmt);
+
+    $resultData = mysqli_stmt_get_result($stmt);
+
+    if(mysqli_fetch_assoc($resultData))
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+
+    mysqli_stmt_close($stmt);
+}
+
+function OnlyEmailExists($conn, $email)
+{
+    $sql = "SELECT * FROM users WHERE usersEmail = ?;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt, $sql))
+    {
+        header("location: ../signup.php?error=stmtFailedOnlyEmailExists");
+        exit();
+    }
+    
+    mysqli_stmt_bind_param($stmt, "s", $email);
+    mysqli_stmt_execute($stmt);
+
+    $resultData = mysqli_stmt_get_result($stmt);
+
+    if(mysqli_fetch_assoc($resultData))
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+
+    mysqli_stmt_close($stmt);
+}
 
 function createUser($conn, $anrede, $lastname, $firstname, $email, $username, $pwd, $typ, $status)
 {
@@ -278,11 +331,13 @@ function getAllTickets($conn)
 
 function userUid_by_userId($conn, $userId)
 {
+    var_dump($userId);
     $stmt = mysqli_stmt_init($conn);
 
+    //if(!mysqli_stmt_prepare($stmt, "SELECT * FROM users;"))
     if(!mysqli_stmt_prepare($stmt, "SELECT usersUid FROM users WHERE usersId =" . $userId .";"))
     {
-        header("location: ../signup.php?error=stmtFailed");
+        header("location: ../index.php?currPage=edit_user&usersId=". $userId ."&error=stmtFaileduserUid_by_userId");
         exit();
     }
 
@@ -301,35 +356,85 @@ function userUid_by_userId($conn, $userId)
         $userUid = $row["usersUid"];
 
     }
-
+    mysqli_stmt_close($stmt);
     return $userUid;
 
 }
 
-
-function editUserByAdmin($conn, $userId, $anrede, $lastname, $firstname, $email, $username, $typ, $status)
+function userEmail_by_userId($conn, $userId)
 {
-        $sql = "UPDATE users SET usersAnrede = ?, usersNachname = ?, usersVorname = ?, usersEmail = ?, usersUid = ?, usersTyp = ?, usersStatus = ?
-                WHERE usersId = $userId;";
+    $stmt = mysqli_stmt_init($conn);
+
+    if(!mysqli_stmt_prepare($stmt, "SELECT usersEmail FROM users WHERE usersId =" . $userId .";"))
+    {
+        header("location: ../signup.php?error=stmtFaileduserEmail_by_userId");
+        exit();
+    }
+
+    mysqli_stmt_execute($stmt);
+
+    $result_userEmail = mysqli_stmt_get_result($stmt);
+
+    if($result_userEmail === false )
+    {
+        return "unknown";
+    }
+    else
+    {
+
+        $row = mysqli_fetch_assoc($result_userEmail);
+        $userEmail = $row["usersEmail"];
+
+    }
+    mysqli_stmt_close($stmt);
+    return $userEmail;
+
+}
+
+// Password not handled yet
+function editUserByAdmin($conn, $userId, $pwdChanged, $anrede, $lastname, $firstname, $email, $username, $pwd, $typ, $status)
+{
+
+    $sql = "UPDATE users SET usersAnrede = ?, usersNachname = ?, usersVorname = ?, usersEmail = ?, usersUid = ?, usersTyp = ?, usersStatus = ?
+            WHERE usersId = $userId;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt, $sql))
+    {
+        // existingUsersId = userId check and change 
+        header("location: ../edit_user.php?usersId=". $userId ."&error=stmtFailededitUserByAdmin");
+        exit();
+    }
+    
+    #Passwort wird gehashed
+    $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
+
+    mysqli_stmt_bind_param($stmt, "sssssss", $anrede, $lastname, $firstname ,$email, $username, $typ, $status);
+    
+    if(mysqli_stmt_execute($stmt)){
+        header("location: ../index.php?currPage=admin&error=none");
+    }
+    mysqli_stmt_close($stmt);
+    //exit??
+    if($pwdChanged){
+        $sql = "UPDATE users SET usersPassword = ? WHERE usersId = $userId;";
         $stmt = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt, $sql))
         {
-            header("location: ../edit_user.php?usersId=". $existingUsersId ."&error=stmtFailed");
+            header("location: ../index.php?currPage=edit_user&usersId=". $userId ."&error=stmtFailedPwd");
             exit();
         }
-
-
-
         #Passwort wird gehashed
         $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
 
-        mysqli_stmt_bind_param($stmt, "sssssss", $anrede, $lastname, $firstname ,$email, $username, $typ, $status);
-        
+        mysqli_stmt_bind_param($stmt, "s", $hashedPwd);
+
         if(mysqli_stmt_execute($stmt)){
+            mysqli_stmt_close($stmt);
             header("location: ../index.php?currPage=admin&error=none");
         }
         mysqli_stmt_close($stmt);
-        exit();    
+    }   
+    exit();
 }
 
 

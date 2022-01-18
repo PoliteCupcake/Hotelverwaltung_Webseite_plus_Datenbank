@@ -60,7 +60,7 @@
                     break;
                 case "serviceTech": include "serviceTech.php";
                     break;
-                case "edit_user": include "edit_user.php";
+                case "edit_user": include "edit_user.php"; // case: edit_user&
                     break;
                 default: include "news.php";
             }

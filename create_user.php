@@ -1,3 +1,16 @@
+<?php 
+    if(!isset($_SESSION)){
+        session_start();
+    }
+    
+    $ErrorArr = $_SESSION["signUpErrors"];
+    require_once "include/functions.inc.php";
+    
+    if(isset($_GET["inputError"])){
+        echo "<p>error</p>";
+    }
+?>
+
 <div class="PageContent">
     <h2>Neuen Benutzer anlegen</h2>
     <form action="include/create_user.inc.php" method="post">
@@ -35,7 +48,6 @@
                 <label class="col-md-4 text-md-end" for="pwdRepeat">Passwort wiederhgolen*:</label>
                 <input class="col-md-6" type="password" name="pwdRepeat" >
             </div>
-
             <div class="container row pb-2">
                 <label class="col-md-4 text-md-end" for="role">Rolle: </label>
                 <select class="col-md-6" name="role" id="role">

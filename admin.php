@@ -38,7 +38,7 @@
                     echo '<td>'. $user['username'] .'</td>';
                     echo '<td>'. $user['firstname'] . ' ' . $user['lastname'] .'</td>';
                     echo '<td>'. $user['role'] .'</td>';
-                    echo '<td>[ <a href="edit_user.php?usersId='. $user['usersId'] .'">bearbeiten</a> ]</td>';
+                    echo '<td>[ <a href="index.php?currPage=edit_user&usersId='. $user['usersId'] .'">bearbeiten</a> ]</td>';
                     echo '</tr>';
                  }
               ?>

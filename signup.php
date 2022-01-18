@@ -2,8 +2,10 @@
     if(!isset($_SESSION)){
         session_start();
     }
+    if(isset($_SESSION["signUpErrors"])){
+        $ErrorArr = $_SESSION["signUpErrors"];
+    } 
     
-    $ErrorArr = $_SESSION["signUpErrors"];
     require_once "include/functions.inc.php";
     
     if(isset($_GET["inputError"])){

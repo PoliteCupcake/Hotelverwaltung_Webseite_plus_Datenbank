@@ -43,14 +43,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $ErrorArr["pwdRepeat"]= "Passwort beim wiederholen gescheitert";
     }
 }
-
 $_SESSION["signUpErrors"] = $ErrorArr;
 
-
 if(signUpError($stringInputArr, $ErrorArr)){
-    header("location: ../index.php?currPage=signup&inputError=formIncomplete");
+    header("location: ../index.php?currPage=create_user&inputError=wrongInputs");
     exit(); 
 }
+
+
 
 if(isset($_POST["submit"]))
 {   
@@ -62,10 +62,17 @@ if(isset($_POST["submit"]))
     $pwd = $_POST["pwd"];
     $pwdRepeat = $_POST["pwdRepeat"];
     // typ can only be changed by admin!!
-    $typ = "guest";         //Options: anonym, guest, service, admin
-    $status = "active";     //Options: active, inactive
+    $typ = $_POST["role"];          //Options: anonym, guest, service, admin
 
-    createUser($conn, $anrede, $firstname, $lastname, $email, $username, $pwd, $typ, $status);
+    if($_POST["status"]){           //Options: active, inactive
+        $status = "active";
+    }
+    else{
+        $status = "inactive";
+    }
+    
+    var_dump($_POST);
+    createUserByAdmin($conn, $anrede, $firstname, $lastname, $email, $username, $pwd, $typ, $status);
 }
 
 

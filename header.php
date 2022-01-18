@@ -45,7 +45,7 @@
                 </li>
             <?php else : ?>
                 <li class="nav-item">
-                    <a class="nav-link <?php echo (SetGet("help")) ? " active" : ""; ?>" href="index.php?currPage=signup" target="_blank">Jetzt registrieren!</a>
+                    <a class="nav-link <?php echo (SetGet("help")) ? " active" : ""; ?>" href="index.php?currPage=signup">Jetzt registrieren!</a> <!--target blank deleted-->
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#LoginField" role="button">Oder Login!</a>
