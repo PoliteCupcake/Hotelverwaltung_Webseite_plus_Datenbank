@@ -1,12 +1,20 @@
-<?php 
-    if(!isset($_SESSION)){
-        session_start();
-    }
-    function SetGet($page){
-        if(isset($_GET["currPage"])){
-            return ($_GET["currPage"] == $page) ? TRUE : FALSE;
-        }
-    }
+<?php
+	$anon        = false;
+	$guest       = false;
+	$serviceTech = false;
+	$admin       = false;
+	session_start();
+	if( isset($_SESSION["userid"]) )
+	{
+		switch($_SESSION["userRole"])
+		{
+			case "guest"      : $guest       = true; break;
+			case "serviceTech": $serviceTech = true; break;
+			case "admin"      : $admin       = true; break;
+		}
+	}
+	else
+		$anon = true;
 ?>
 
 <header class="text-center bg-gradient">
@@ -23,35 +31,92 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-            <!-- php script for setting links active for current page -->
-                <a class="nav-link <?php echo (!isset($_GET["currPage"]) or (SetGet("home"))) ? " active "  : ""; ?>" href="index.php?currPage=home">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link <?php echo (SetGet("help")) ? " active" : ""; ?>" href="index.php?currPage=help">Hilfe/FAQ</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link <?php echo (SetGet("impressum")) ? " active" : ""; ?>" href="index.php?currPage=impressum">Impressum</a>
-            </li>
+            
+            <!--- NEWS -->
+            <?php if(true) { ?>
+	    <li class="nav-item">
+		<a class="nav-link active" href="index.php?currPage=news">News</a>
+	    </li>
+            <?php } ?>
+
+            <!--- Impressum -->
+            <?php if(true) { ?>
+	    <li class="nav-item">
+		<a class="nav-link active" href="index.php?currPage=impressum">Impressum</a>
+	    </li>
+            <?php } ?>
+
+            <!--- Hilfe -->
+            <?php if(true) { ?>
+	    <li class="nav-item">
+		<a class="nav-link active" href="index.php?currPage=help">Hilfe</a>
+	    </li>
+            <?php } ?>
+
+            <!--- Profil -->
+            <?php if($guest||$serviceTech||$admin) { ?>
+	    <li class="nav-item">
+		<a class="nav-link active" href="index.php?currPage=profile">Profil</a>
+	    </li>
+            <?php } ?>
+
+            <!--- News erstellen -->
+            <?php if($admin) { ?>
+	    <li class="nav-item">
+		<a class="nav-link active" href="index.php?currPage=createNews">News erstellen</a>
+	    </li>
+            <?php } ?>
+
+            <!--- Meine Tickets -->
+            <?php if($guest||$serviceTech||$admin) { ?>
+	    <li class="nav-item">
+		<a class="nav-link active" href="index.php?currPage=myTickets">Meine Tickets</a>
+	    </li>
+            <?php } ?>
+
+            <!--- Alle Tickets -->
+            <?php if($serviceTech||$admin) { ?>
+	    <li class="nav-item">
+		<a class="nav-link active" href="index.php?currPage=allTickets">Alle Tickets</a>
+	    </li>
+            <?php } ?>
+
+            <!--- Alle User -->
+            <?php if($admin) { ?>
+	    <li class="nav-item">
+		<a class="nav-link active" href="index.php?currPage=allUsers">Alle User</a>
+	    </li>
+            <?php } ?>
         </ul>
-        <!-- Login, registry change to log out if logged in  -->
+
+<!-- login, logout, signup nicht vergessen -->
+
         <ul class="navbar-nav d-flex justify-content-end">
-            <?php if(isset($_SESSION["Username"])) : ?>
-                <li class="nav-item">
-                <a class="nav-link <?php echo  (SetGet("profile")) ? " active "  : ""; ?>" href="index.php?currPage=profile">Profil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php?UserStatus=logout">Log Out!</a>
-                </li>
-            <?php else : ?>
-                <li class="nav-item">
-                    <a class="nav-link <?php echo (SetGet("help")) ? " active" : ""; ?>" href="index.php?currPage=signup">Jetzt registrieren!</a> <!--target blank deleted-->
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#LoginField" role="button">Oder Login!</a>
-                </li> 
-            <?php endif; ?>
+
+            <!--- Login -->
+            <?php if($anon) { ?>
+	    <li class="nav-item">
+		<a class="nav-link active" href="index.php?currPage=loginNew">Login</a>
+	    </li>
+            <?php } ?>
+
+            <!--- Registrieren -->
+            <?php if($anon) { ?>
+	    <li class="nav-item">
+		<a class="nav-link active" href="index.php?currPage=signup">Registrieren</a>
+	    </li>
+            <?php } ?>
+
+	    <!--- Logout -->
+            <?php if($guest||$serviceTech||$admin) { ?>
+	    <li class="nav-item">
+                <div><?php echo $_SESSION["useruid"]." (<i>".$_SESSION["userRole"].")</i>"; ?></div>
+		<a class="nav-link active" href="index.php?currPage=logout">Logout</a>
+	    </li>
+            <?php } ?>
+
         </ul>
+
         </div>
     </div>
 </nav>

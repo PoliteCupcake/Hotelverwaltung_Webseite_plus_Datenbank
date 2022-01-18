@@ -1,20 +1,3 @@
-<?php
-    function CheckUserLevel(){ #git test
-        // get level from database
-        if(isset($_SESSION["role"])){ 
-            switch($_SESSION["role"]){
-                case "guest": return 1;
-                    break;
-                case "service": return 2;
-                    break;
-                case "admin": return 3;
-                    break;
-                default: return 0;
-            }
-        }
-    }
-?>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -27,14 +10,7 @@
     <body>
         <?php
         include_once 'header.php';
-        if(!isset($_SESSION["Username"])){
-            include 'login.php';
-        }
-       # include 'logout.php';
-        // just a test
-        if(isset($_SESSION["Username"])){
-            echo $_SESSION["Username"];
-        }
+
 
         // echos content of the current page
         if(isset($_GET["currPage"])){
@@ -56,14 +32,17 @@
                     break;
                 case "loginNew": include "loginNew.php";
                     break;
-                case "create_user": include "create_user.php";
-                    break;
-                case "serviceTech": include "serviceTech.php";
+                case "createUser": include "createUser.php";
                     break;
                 case "edit_user": include "edit_user.php"; // case: edit_user&
                     break;
                 case "myTickets" : include "myTickets.php";
                     break;
+                case "allTickets": include "allTickets.php";
+                case "allUsers": include "allUsers.php";
+                case "createNews": include "createNews.php";
+                    break;
+                case "logout": include "logout.php"; break;
 
                 default: include "news.php";
 

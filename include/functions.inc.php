@@ -256,7 +256,7 @@ function loginUser($conn, $username, $pwd)
         $_SESSION["userid"] = $uidExists["usersId"] ;
         $_SESSION["useruid"] = $uidExists["usersUid"];
         $_SESSION["userRole"] = $uidExists["usersTyp"];
-        header("location: ../index.php");
+        header("location: ../index.php?login=success");
         exit();
        
     }
