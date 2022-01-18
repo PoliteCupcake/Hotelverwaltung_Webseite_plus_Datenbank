@@ -36,6 +36,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $Errors[$input] = checkForAlph($UserData[$input]);
     }
     if(pwdMatch($UserData["pwd"], $UserData["pwdRepeat"])){
+        $ErrorArr["pwd"]= "";
         $ErrorArr["pwdRepeat"]= "";
     }
     else{

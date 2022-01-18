@@ -253,8 +253,8 @@ function loginUser($conn, $username, $pwd)
     else if($checkPwd === true)
     {
         session_start();
-        $_SESSION["userid"] = $uidExists["usersId"] ;
-        $_SESSION["useruid"] = $uidExists["usersUid"];
+        $_SESSION["userid"  ] = $uidExists["usersId" ] ;
+        $_SESSION["useruid" ] = $uidExists["usersUid"];
         $_SESSION["userRole"] = $uidExists["usersTyp"];
         header("location: ../index.php?login=success");
         exit();
@@ -311,13 +311,13 @@ function getAllTickets($conn)
     $allTickets = array();
     while($row = mysqli_fetch_assoc($resultTickets))
     {
-        $ticket['id'] = $row["id"];
-        $ticket['title'] = $row["title"];
-        $ticket['img_path'] = $row["file_path"];
-        $ticket['comment'] = $row["comment"];
-        $ticket['user_id'] = $row["user_id"];
-        $ticket['ticketStatus'] = $row["ticketStatus"];
-        $ticket['created'] = $row["created"];
+        $ticket['id'            ] = $row["id"           ];
+        $ticket['title'         ] = $row["title"        ];
+        $ticket['img_path'      ] = $row["file_path"    ];
+        $ticket['comment'       ] = $row["comment"      ];
+        $ticket['user_id'       ] = $row["user_id"      ];
+        $ticket['ticketStatus'  ] = $row["ticketStatus" ];
+        $ticket['created'       ] = $row["created"      ];
 
         $allTickets[$ticket['id']] = $ticket;
 

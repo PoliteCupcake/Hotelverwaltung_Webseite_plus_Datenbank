@@ -71,7 +71,7 @@ if(isset($_POST["submit"]))
         $status = "inactive";
     }
     
-    var_dump($_POST);
+
     createUserByAdmin($conn, $anrede, $firstname, $lastname, $email, $username, $pwd, $typ, $status);
 }
 
