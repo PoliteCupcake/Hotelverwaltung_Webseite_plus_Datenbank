@@ -7,7 +7,7 @@ include_once "include/functions.inc.php";
 
 if(isset($_SESSION["userid"]) )
 {
-    if($_SESSION["userRole"] === "serviceTech" || $_SESSION["userRole"] === "admin")   #zeigt alle tickets an Titel Status Datum
+    if($serviceTech || $admin)   #zeigt alle tickets an Titel Status Datum
     {
 ?>
         <div class="PageWrap">
