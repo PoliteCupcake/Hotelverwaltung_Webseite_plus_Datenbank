@@ -92,7 +92,7 @@ if(isset($_POST["submit"]))
         }
     }
     if(userEmail_by_userId($conn, $existingUsersId) != $_POST["email"]){
-        if(!OnlyUidExists($conn, $email)){
+        if(!OnlyEmailExists($conn, $email)){
             header("location: ../index.php?currPage=edit_user&usersId=". $existingUsersId ."&inputError=emailAlreadyTaken");
             exit(); 
         }

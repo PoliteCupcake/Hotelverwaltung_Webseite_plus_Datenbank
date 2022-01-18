@@ -7,11 +7,6 @@
     } 
     
     require_once "include/functions.inc.php";
-    
-    if(isset($_GET["inputError"])){
-        echo "<p>error</p>";
-    }
-    
     $existingUsersId = $_GET["usersId"];
     include_once "include/edit_user.inc.php";
 
