@@ -39,7 +39,7 @@
                 case "myTickets" : include "myTickets.php";
                     break;
                 case "allTickets": include "allTickets.php";
-                case "allUsers": include "allUsers.php";
+                    break;
                 case "createTicket": include "createTicket.php";
                     break;
                 case "createNews": include "createNews.php";

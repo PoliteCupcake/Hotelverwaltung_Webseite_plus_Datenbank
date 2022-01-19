@@ -81,7 +81,8 @@ if($guest || $admin || $serviceTech){
 </div>
 <?php 
 }
-else{
+else
+{
     echo '<p>Unberechtigter Zugriff. Bitte anmelden oder Zugriffsrechte prüfen.</p>';
 }
 ?>
