@@ -332,7 +332,6 @@ function getAllTickets($conn)
 
 function userUid_by_userId($conn, $userId)
 {
-    var_dump($userId);
     $stmt = mysqli_stmt_init($conn);
 
 
@@ -460,6 +459,30 @@ function createTicket($conn, $filepath, $title, $comment, $userid, $ticketStatus
     
 }
 
+function updateTicket($conn,$status, $id)
+{
+
+    $sql = "UPDATE tickets SET ticketStatus = ? WHERE id = ?;";
+    $stmt = mysqli_stmt_init($conn);
+
+    if(!mysqli_stmt_prepare($stmt, $sql))
+    {
+        header("location: ../index.php?currPage=ticket&id=" . "$id" ."error=stmtFailedNoUpdate");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "si", $status, $id);
+    if(!mysqli_stmt_execute($stmt))
+    {
+        mysqli_stmt_close($stmt);
+        header("location: ../index.phh?currPage=ticket&" . "$id" . "error=unsuccessfullUpdate");
+    }
+
+    mysqli_stmt_close($stmt);
+    header("location: ../index.phh?currPage=ticket&" . "$id" ."error=noneSuccessfullyUpdated");
+
+}
+
 /*
 
 function createTicket($conn, $file_path, $title, $comment, $user_id)
@@ -486,7 +509,8 @@ function createTicket($conn, $file_path, $title, $comment, $user_id)
 }
 */
 
-function guidv4($data = null) {
+function guidv4($data = null)
+{
     // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
     $data = $data ?? random_bytes(16);
     assert(strlen($data) == 16);
@@ -522,6 +546,7 @@ function createNewsArticle($conn, $filepath, $newstitle, $article)
     
 }
 
+
 function getNews($conn, $limit)
 {
     $stmt = mysqli_stmt_init($conn);
@@ -555,3 +580,4 @@ function getNews($conn, $limit)
 
     return $limitedNews;
 }
+

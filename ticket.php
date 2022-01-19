@@ -61,15 +61,52 @@ if($serviceTech || $admin || ($guest && $ticket['user_id'] === $_SESSION['userid
                                 if($serviceTech)
                                 {
                                 ?>
-                                    <form action="select.html">
-                                        <select name="top5" size="1">
-                                            <option><selected>open</selected></option>
-                                            <option>successfully closed</option>
-                                            <option>unsuccessfully closed</option>
+
+                                    <form action="select.html" method="POST">
+                                        <select name="status" size="1">
+
+                                            <option value='open'
+                                                <?php
+                                                if($ticket['ticketStatus'] === 'open')
+                                                {
+                                                    echo "  selected";
+                                                }
+                                                ?>
+                                            >open</option>
+
+                                            <option value='s_closed'
+                                                <?php
+                                                if($ticket['ticketStatus'] === 'successfully closed')
+                                                {
+                                                    echo "  selected";
+                                                }
+                                                ?>
+                                            >successfully closed</option>
+
+
+
+                                            <option value='u_closed'
+                                                <?php
+                                                if($ticket['ticketStatus'] === 'unsuccessfully closed')
+                                                {
+                                                    echo "  selected";
+                                                }
+                                                ?>
+                                            >unsuccessfully closed</option>
+
 
                                         </select>
                                     </form>
                                 <?php
+
+                               /*  if(isset($_POST["submit"]))
+                                 {
+                                     $status = $_POST["status"];
+                                 }
+
+                                 updateTicket($conn,$status);
+
+                              */
                                 }
                                 else
                                 {
@@ -77,7 +114,6 @@ if($serviceTech || $admin || ($guest && $ticket['user_id'] === $_SESSION['userid
                                 }
                                 ?>
 
-                                
 
                             </td>
 
