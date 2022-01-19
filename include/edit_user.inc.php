@@ -1,106 +1,99 @@
 <?php
+include_once "role.inc.php";
+if($admin){
 
-
-include_once "functions.inc.php";
-include_once "dbaccess.inc.php";
-
-
-
-//$inputArr = array($anrede, $firstname, $lastname, $email, $username, $pwd, $pwdRepeat);
-$stringInputArr = array("firstname", "lastname", "email", "username"); // check these values for errors
-$inputAlph = array("lastname", "firstname");
-
-$UserData = array();
-$ErrorArr = array();
-
-foreach($stringInputArr as $input){
-    $UserData[$input] = "";
-    $ErrorArr[$input] = ""; 
- } 
+    include_once "functions.inc.php";
+    include_once "dbaccess.inc.php";
 
 
 
-if($_SERVER["REQUEST_METHOD"] === "POST"){
+    //$inputArr = array($anrede, $firstname, $lastname, $email, $username, $pwd, $pwdRepeat);
+    $stringInputArr = array("firstname", "lastname", "email", "username"); // check these values for errors
+    $inputAlph = array("lastname", "firstname");
 
-    $existingUsersId = $_POST["usersId"];
+    $UserData = array();
+    $ErrorArr = array();
+
     foreach($stringInputArr as $input){
-        $UserData[$input] = checkInput($_POST[$input]);
+        $UserData[$input] = "";
+        $ErrorArr[$input] = ""; 
+    } 
+    if(isset($_POST["submit"])){
+        if($_SERVER["REQUEST_METHOD"] === "POST"){
 
-        if($UserData[$input] == ""){
-            $ErrorArr[$input] = 'Bitte ausfüllen!'; 
+            $existingUsersId = $_POST["usersId"];
+            foreach($stringInputArr as $input){
+                $UserData[$input] = checkInput($_POST[$input]);
+
+                if($UserData[$input] == ""){
+                    $ErrorArr[$input] = 'Bitte ausfüllen!'; 
+                }
+                else{
+                    $ErrorArr["username"] = checkForAlphNum($UserData["username"]);
+                    $ErrorArr["email"] = checkEmail($UserData["email"]);
+                }
+            }
+            foreach($inputAlph as $input){
+                $Errors[$input] = checkForAlph($UserData[$input]);
+            }     
         }
-        else{
-            $ErrorArr["username"] = checkForAlphNum($UserData["username"]);
-            $ErrorArr["email"] = checkEmail($UserData["email"]);
+    }
+    $_SESSION["signUpErrors"] = $ErrorArr;
+
+    if(!empty($_POST["pwd"])){
+        if(!pwdMatch($_POST["pwd"], $_POST["pwdRepeat"])){
+            header("location: ../index.php?currPage=edit_user&usersId=". $existingUsersId ."&inputError=pwdNotMatching");
+            exit(); 
         }
-    }
-    foreach($inputAlph as $input){
-        $Errors[$input] = checkForAlph($UserData[$input]);
-    }
-     
-}
-
-
-
-
-$_SESSION["signUpErrors"] = $ErrorArr;
-
-if(!empty($_POST["pwd"])){
-    if(!pwdMatch($_POST["pwd"], $_POST["pwdRepeat"])){
-        header("location: ../index.php?currPage=edit_user&usersId=". $existingUsersId ."&inputError=pwdNotMatching");
-        exit(); 
-    }
-    $pwdChanged = true;
-}
-else{
-    $pwdChanged = false;
-}
-
-if(signUpError($stringInputArr, $ErrorArr)){
-    header("location: ../index.php?currPage=edit_user&usersId=". $existingUsersId ."&inputError=wrongInputs");
-    exit(); 
-}
-
-
-
-if(isset($_POST["submit"]))
-{   
-
-
-    $anrede = $_POST["anrede"];
-    $lastname = $_POST["lastname"];
-    $firstname = $_POST["firstname"];
-    $email = $_POST["email"];
-    $username = $_POST["username"];
-    $pwd = $_POST["pwd"];
-    $pwdRepeat = $_POST["pwdRepeat"];
-    // typ can only be changed by admin!!
-    $typ = $_POST["role"];          //Options: anonym, guest, service, admin
-
-    if($_POST["status"]){           //Options: active, inactive
-        $status = "active";
+        $pwdChanged = true;
     }
     else{
-        $status = "inactive";
+        $pwdChanged = false;
     }
 
-
-    if(userUid_by_userId($conn, $existingUsersId) !== $_POST["username"]){
-        if(!OnlyUidExists($conn, $username)){
-            header("location: ../index.php?currPage=edit_user&usersId=". $existingUsersId ."&inputError=usernameAlreadyTaken");
-            exit(); 
-        }
+    if(signUpError($stringInputArr, $ErrorArr)){
+        header("location: ../index.php?currPage=edit_user&usersId=". $existingUsersId ."&inputError=wrongInputs");
+        exit(); 
     }
-    if(userEmail_by_userId($conn, $existingUsersId) != $_POST["email"]){
-        if(!OnlyEmailExists($conn, $email)){
-            header("location: ../index.php?currPage=edit_user&usersId=". $existingUsersId ."&inputError=emailAlreadyTaken");
-            exit(); 
+
+    if(isset($_POST["submit"]))
+    {   
+
+
+        $anrede = $_POST["anrede"];
+        $lastname = $_POST["lastname"];
+        $firstname = $_POST["firstname"];
+        $email = $_POST["email"];
+        $username = $_POST["username"];
+        $pwd = $_POST["pwd"];
+        $pwdRepeat = $_POST["pwdRepeat"];
+        // typ can only be changed by admin!!
+        $typ = $_POST["role"];          //Options: anonym, guest, serviceTech, admin
+
+        if($_POST["status"]){           //Options: active, inactive
+            $status = "active";
         }
-    } 
+        else{
+            $status = "inactive";
+        }
 
 
-    editUserByAdmin($conn, $existingUsersId, $pwdChanged, $anrede, $firstname, $lastname, $email, $username, $pwd, $typ, $status);
+        if(userUid_by_userId($conn, $existingUsersId) !== $_POST["username"]){
+            if(!OnlyUidExists($conn, $username)){
+                header("location: ../index.php?currPage=edit_user&usersId=". $existingUsersId ."&inputError=usernameAlreadyTaken");
+                exit(); 
+            }
+        }
+        if(userEmail_by_userId($conn, $existingUsersId) != $_POST["email"]){
+            if(!OnlyEmailExists($conn, $email)){
+                header("location: ../index.php?currPage=edit_user&usersId=". $existingUsersId ."&inputError=emailAlreadyTaken");
+                exit(); 
+            }
+        } 
+        editUserByAdmin($conn, $existingUsersId, $pwdChanged, $anrede, $firstname, $lastname, $email, $username, $pwd, $typ, $status);
+    }
 }
-
-
+else{
+    echo '<p>Unberechtigter Zugriff. Bitte anmelden oder Zugriffsrechte prüfen.</p>';
+}
 

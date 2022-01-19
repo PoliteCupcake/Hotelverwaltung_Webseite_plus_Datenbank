@@ -1,5 +1,5 @@
 <?php
-
+/*
     if(isset($_POST["submit"]))
     {
         $username = $_POST["uid"];
@@ -21,3 +21,5 @@
         header("location: ../login.php?error=emptyinput");
         exit();
     }
+}
+*/
