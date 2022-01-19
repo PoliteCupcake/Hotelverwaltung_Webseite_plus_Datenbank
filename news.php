@@ -7,19 +7,29 @@
     <?php
     $limitednews = getNews($conn, 2);
     foreach($limitednews as $news){
-        echo '<div class="PageContent NewsContent">';
-        echo    '<div class="row">';
-        echo        '<div class="col-md-4">';
-        echo            '<img class="img-fluid" src="' . $news["img_path"] . '" alt="mountains">';
-        echo        '</div>';
-        echo        '<div class="col-md-8 border-start">';
-        echo            '<h2 class="display-5">' . $news["title"] . '</h2>';
-        echo            '<p>' . $news["article"] . '</p>';
-        echo        '</div>';
-        echo    '</div>';
-        echo '</div>';
+        if($news["img_path"] == "NOIMAGE"){
+            echo '<div class="PageContent NewsContent">';
+            echo    '<h2 class="display-5">' . $news["title"] . '</h2>';
+            echo    '<p>' . $news["article"] . '</p>';
+            echo    '<p>' . $news["date"] . '</p>';
+            echo '</div>';
+        }
+        else{
+            echo '<div class="PageContent NewsContent">';
+            echo    '<div class="row">';
+            echo        '<div class="col-md-4">';
+            echo            '<img class="img-fluid" src="' . $news["img_path"] . '" alt="mountains">';
+            echo             '<p>' . $news["date"] . '</p>';
+            echo        '</div>';
+            echo        '<div class="col-md-8 border-start">';
+            echo            '<h2 class="display-5">' . $news["title"] . '</h2>';
+            echo            '<p>' . $news["article"] . '</p>'; 
+            echo        '</div>';
+            echo    '</div>';
+            echo '</div>';
+        }
     }
-    var_dump($limitednews);
+
     ?>
 
     <!--

@@ -391,7 +391,7 @@ function userEmail_by_userId($conn, $userId)
 
 }
 
-// Password not handled yet
+
 function editUserByAdmin($conn, $userId, $pwdChanged, $anrede, $lastname, $firstname, $email, $username, $pwd, $typ, $status)
 {
 
@@ -405,9 +405,6 @@ function editUserByAdmin($conn, $userId, $pwdChanged, $anrede, $lastname, $first
         exit();
     }
     
-    #Passwort wird gehashed
-    $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
-
     mysqli_stmt_bind_param($stmt, "sssssss", $anrede, $lastname, $firstname ,$email, $username, $typ, $status);
     
     if(mysqli_stmt_execute($stmt)){
