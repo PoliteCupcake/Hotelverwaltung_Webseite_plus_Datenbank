@@ -405,6 +405,9 @@ function editUserByAdmin($conn, $userId, $pwdChanged, $anrede, $lastname, $first
         exit();
     }
     
+
+
+
     mysqli_stmt_bind_param($stmt, "sssssss", $anrede, $lastname, $firstname ,$email, $username, $typ, $status);
     
     if(mysqli_stmt_execute($stmt)){
@@ -453,7 +456,7 @@ function createTicket($conn, $filepath, $title, $comment, $userid, $ticketStatus
         header("location: ../index.php?currPage=myTicket&error=none");
     }
     mysqli_stmt_close($stmt);
-    
+
 }
 
 function updateTicket($conn,$status, $id)
@@ -579,3 +582,112 @@ function getNews($conn, $limit)
     return $limitedNews;
 }
 
+
+function updateNames($conn, $userId,  $lastname, $firstname)
+{
+
+    $sql = "UPDATE users SET usersNachname = ?, usersVorname = ? WHERE usersId = ? ;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt, $sql))
+    {
+        header("location: ../index.php?currPage=profile&error=stmtFailedUpdNames");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "sss",  $lastname, $firstname, $userId);
+    
+    if(mysqli_stmt_execute($stmt)){
+        mysqli_stmt_close($stmt);
+        header("location: ../index.php?currPage=profile&nameChangeSuccess");
+    }
+    mysqli_stmt_close($stmt);
+}
+
+function updateEmail($conn, $userId,  $email)
+{
+
+    $sql = "UPDATE users SET usersEmail = ? WHERE usersId = ? ;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt, $sql))
+    {
+        header("location: ../index.php?currPage=profile&error=stmtFailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "ss",  $email, $userId);
+    
+    if(mysqli_stmt_execute($stmt)){
+        header("location: ../index.php?currPage=profile&success");
+    }
+    mysqli_stmt_close($stmt);
+}
+
+
+function updateUsername($conn, $userId,  $username)
+{
+
+    $sql = "UPDATE users SET usersUid = ? WHERE usersId = ? ;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt, $sql))
+    {
+        header("location: ../index.php?currPage=profile&error=stmtFailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "ss",  $username, $userId);
+    
+    if(mysqli_stmt_execute($stmt)){
+        header("location: ../index.php?currPage=profile&success");
+    }
+    mysqli_stmt_close($stmt);
+}
+
+function userFirstName_by_userId($conn, $userId)
+{
+    $stmt = mysqli_stmt_init($conn);
+
+    if(!mysqli_stmt_prepare($stmt, "SELECT usersVorname FROM users WHERE usersId =" . $userId .";"))
+    {
+        header("location: .../index.php?currPage=profile&error=stmtFailedFirstname");
+        exit();
+    }
+
+    mysqli_stmt_execute($stmt);
+
+    $result_userFirstname = mysqli_stmt_get_result($stmt);
+
+    if($result_userFirstname === false ){
+        return "unknown";
+    }
+    else{
+        $row = mysqli_fetch_assoc($result_userFirstname);
+        $firstname = $row["usersVorname"];
+    }
+    mysqli_stmt_close($stmt);
+    return $firstname;
+}
+
+function userLastName_by_userId($conn, $userId)
+{
+    $stmt = mysqli_stmt_init($conn);
+
+    if(!mysqli_stmt_prepare($stmt, "SELECT usersNachname FROM users WHERE usersId =" . $userId .";"))
+    {
+        header("location: .../index.php?currPage=profile&error=stmtFailedFirstname");
+        exit();
+    }
+
+    mysqli_stmt_execute($stmt);
+
+    $result_userLastname = mysqli_stmt_get_result($stmt);
+
+    if($result_userLastname === false ){
+        return "unknown";
+    }
+    else{
+        $row = mysqli_fetch_assoc($result_userLastname);
+        $lastname = $row["usersNachname"];
+    }
+    mysqli_stmt_close($stmt);
+    return $lastname;
+}
