@@ -40,17 +40,67 @@ if($serviceTech || $admin || ($guest && $ticket['user_id'] === $_SESSION['userid
 
 
             <div class="container">
-                <div class="row row-cols-4">
-                    <div class="col"><?php echo $user_name; ?></div>
-                    <div class="col"><?php echo $ticket['comment']; ?></div>
-                    <div class="col-6"><?php echo $ticket['created']; ?></div>
-                    <div class="col"><?php echo $ticket['ticketStatus']; ?></div>
-                </div>
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+
+                            <th scope="col">Erstellt von</th>
+                            <th scope="col">Datum</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row"><?php echo $user_name; ?></th>
+                            <td><?php echo $ticket['created']; ?></td>
+                            <td>
+
+                                <?php
+
+                                if($serviceTech)
+                                {
+                                ?>
+                                    <form action="select.html">
+                                        <select name="top5" size="1">
+                                            <option><selected>open</selected></option>
+                                            <option>successfully closed</option>
+                                            <option>unsuccessfully closed</option>
+
+                                        </select>
+                                    </form>
+                                <?php
+                                }
+                                else
+                                {
+                                    echo $ticket['ticketStatus'];
+                                }
+                                ?>
+
+                                
+
+                            </td>
+
+
+
+
+                        </tbody>
+                    </table>
+
             </div>
+
+        </div>
+
+        <div class="PageContent">
 
             <img src="<?php echo $ticket['img_path']; ?>" class="img-fluid">
 
         </div>
+
+        <div class="PageContent">
+            <div class="col"><?php echo $ticket['comment']; ?></div>
+        </div>
+
     </div>
 
 <?php
