@@ -27,7 +27,10 @@ $ticket['created'       ] = $row["created"      ];
 
 mysqli_stmt_close($stmt);
 
-if($serviceTech || $admin || $guest)
+$user_name = userUid_by_userId($conn, $ticket['user_id']);
+
+
+if($serviceTech || $admin || ($guest && $ticket['user_id'] === $_SESSION['userid']))
 {
 ?>
     <div class="PageWrap">
@@ -35,11 +38,17 @@ if($serviceTech || $admin || $guest)
         <h2><?php echo $ticket['title']; ?> </h2>
         <div class="PageContent">
 
-            <?php echo $ticket['comment']; ?>
-            <?php echo $ticket['img_path']; ?>
-            <?php echo $ticket['created']; ?>
 
+            <div class="container">
+                <div class="row row-cols-4">
+                    <div class="col"><?php echo $user_name; ?></div>
+                    <div class="col"><?php echo $ticket['comment']; ?></div>
+                    <div class="col-6"><?php echo $ticket['created']; ?></div>
+                    <div class="col"><?php echo $ticket['ticketStatus']; ?></div>
+                </div>
+            </div>
 
+            <img src="<?php echo $ticket['img_path']; ?>" class="img-fluid">
 
         </div>
     </div>

@@ -19,13 +19,13 @@ if(isset($_SESSION["userid"])  )
     <div class="PageContent">
         <h2>Tickets</h2>
         <a href="index.php?currPage=createTicket">Neues Ticket anlegen!</a>
-        <table class="table table-bordered table-dark">
+        <table class="table table-bordered table-striped">
             <thead> <!-- Table head -->
             <tr>
 
                 <th scope="col">Betreff</th>
-                <th scope="col">Erstellt von</th>
                 <th scope="col">Ticketstatus</th>
+                <th scope="col">Erstellt</th>
 
             </tr>
             </thead>
@@ -39,10 +39,11 @@ if(isset($_SESSION["userid"])  )
                 if($_SESSION["userid"] === $ticket["user_id"])
                 {
                     echo '<tr>';
-                    echo '<td>' . $ticket['title'] . '</td>';
-                    echo '<td>' . userUid_by_userId($conn, $ticket['user_id']) . '</td>';
+                    echo '<td><a href="index.php?currPage=ticket&id='. $ticket['id'] .'">'. $ticket['title'] .'</a></td>';
+                 #   echo '<td>' . userUid_by_userId($conn, $ticket['user_id']) . '</td>';
                     echo '<td>' . $ticket['ticketStatus'] . '</td>';
-                    #   echo '<td>[ <a href="edit_user.php?user_id='. $ticket['user_id'] .'">bearbeiten</a> ]</td>';
+                    echo '<td>' . $ticket['created'] . '</td>';
+
                     echo '</tr>';
                 }
             }

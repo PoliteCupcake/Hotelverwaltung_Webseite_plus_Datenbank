@@ -19,7 +19,7 @@ $uploadOk = 1;
 $uuid = guidv4();
 $imageFileType = strtolower(pathinfo(basename($_FILES["TicketUpload"]["name"]),PATHINFO_EXTENSION));
 $target_dir = "..\\ticketUploads\\";
-$target_file = $target_dir . $uuid. $imageFileType; 
+$target_file = $target_dir . $uuid. "." . $imageFileType;
 
 
 
