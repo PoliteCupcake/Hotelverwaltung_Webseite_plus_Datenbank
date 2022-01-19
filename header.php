@@ -89,8 +89,6 @@
             <?php } ?>
         </ul>
 
-<!-- login, logout, signup nicht vergessen -->
-
         <ul class="navbar-nav d-flex justify-content-end">
 
             <!--- Login -->
@@ -108,12 +106,11 @@
             <?php } ?>
 
 	    <!--- Logout -->
-            <?php if($guest||$serviceTech||$admin) { ?>
-				<li class="nav-item">
-				<div><?php echo $_SESSION["useruid"]." (<i>".$_SESSION["userRole"].")</i>"; ?></div>
-				<a class="nav-link active" href="index.php?currPage=logout">Logout</a>
-				</li>
-            <?php } ?>
+            <?php if($guest||$serviceTech||$admin)
+            {
+				echo $_SESSION["useruid"]." (<i>".$_SESSION["userRole"].")</i><p><a href='index.php?currPage=logout'>Logout</a></p>";
+            }
+            ?>
 
         </ul>
 
