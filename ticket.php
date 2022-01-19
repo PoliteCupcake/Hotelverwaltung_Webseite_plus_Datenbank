@@ -63,7 +63,7 @@ if($serviceTech || $admin || ($guest && $ticket['user_id'] === $_SESSION['userid
                                 ?>
 
                                     <form action="updateTicket.inc.php" method="POST">
-                                        <input type ="hidden" name="id" value=<?php echo $ticket['id']; ?>>
+                                        <!--    <input type ="hidden" name="id" value=<?php echo $ticket['id']; ?>> -->
                                         <select name="status" size="1">
 
                                             <option value='open'
@@ -99,6 +99,12 @@ if($serviceTech || $admin || ($guest && $ticket['user_id'] === $_SESSION['userid
                                         <p><button type="submit" name="submit">update</button></p>
                                     </form>
 
+                                <?php
+                                }
+                                else
+                                {
+                                    ?>
+                                 <td><?php echo $ticket['ticketStatus']; ?></td>
                                 <?php
                                 }
                                 ?>
