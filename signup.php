@@ -1,10 +1,7 @@
 
 
 <?php
-/*
-durch rollen iterarieren: nur anon sieht sign up
-guest, service, admin sind bereits eingeloggt;
-*/
+
     if(!isset($_SESSION)){
         session_start();
     }

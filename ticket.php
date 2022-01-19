@@ -3,6 +3,10 @@
 include_once "include/dbaccess.inc.php";
 include_once "include/functions.inc.php";
 
+if($serviceTech || $admin || ($guest && $ticket['user_id'] === $_SESSION['userid']))
+{
+
+
 $stmt = mysqli_stmt_init($conn);
 
 if(!mysqli_stmt_prepare($stmt, "SELECT * FROM tickets WHERE id = " . $_GET['id'] . ";"))
@@ -29,10 +33,8 @@ mysqli_stmt_close($stmt);
 
 $user_name = userUid_by_userId($conn, $ticket['user_id']);
 
-
-if($serviceTech || $admin || ($guest && $ticket['user_id'] === $_SESSION['userid']))
-{
 ?>
+
     <div class="PageWrap">
 
         <h2><?php echo $ticket['title']; ?> </h2>
@@ -170,6 +172,11 @@ if($serviceTech || $admin || ($guest && $ticket['user_id'] === $_SESSION['userid
     </div>
 
 <?php
+}
+else
+{
+    header("Location: /index.php");
+    echo '<p> Unberechtigter Zugriff. Bitte anmelden oder Zugriffsrechte prüfen.</p>';
 }
 ?>
 
