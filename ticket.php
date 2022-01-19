@@ -175,8 +175,8 @@ $user_name = userUid_by_userId($conn, $ticket['user_id']);
 }
 else
 {
-    header("Location: /index.php");
-    echo '<p> Unberechtigter Zugriff. Bitte anmelden oder Zugriffsrechte prüfen.</p>';
+
+    echo '<p class="text-center">Unberechtigter Zugriff! Bitte anmelden oder Zugriffsrechte prüfen um Tickets zu sehen</p>';
 }
 ?>
 
