@@ -62,7 +62,7 @@ if(isset($_POST["submit"]))
     $pwd = $_POST["pwd"];
     $pwdRepeat = $_POST["pwdRepeat"];
     // typ can only be changed by admin!!
-    $typ = $_POST["role"];          //Options: anonym, guest, service, admin
+    $typ = $_POST["role"];          //Options: anonym, guest, serviceTech, admin
 
     if($_POST["status"]){           //Options: active, inactive
         $status = "active";

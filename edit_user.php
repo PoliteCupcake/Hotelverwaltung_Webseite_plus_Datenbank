@@ -71,7 +71,7 @@ $specifiedUser = array();
                 <?php
                 if($specifiedUser["role"] == "guest"){
                     echo '<option selected name="role" value="guest">Gast</option>';
-                    echo '<option name="role" value="service">Techniker</option>';
+                    echo '<option name="role" value="serviceTech">Techniker</option>';
                 }
                 else{
                     echo '<option name="role" value="guest">Gast</option>';
