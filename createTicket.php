@@ -7,11 +7,11 @@
             <form action="include/createTicket.inc.php" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="TicketBetreff" class="form-label">Betreffend...</label>
-                    <input type="text" class="form-control" id="TicketBetreff">
+                    <input type="text" name="TicketTitle" class="form-control" id="TicketBetreff">
                 </div>
                 <div class="mb-3">
                     <label for="TicketBeschreibung" class="form-label">Beschreibung:</label>
-                    <textarea class="form-control" id="TicketBeschreibung" rows="3"></textarea>
+                    <textarea class="form-control" name="TicketComment" id="TicketBeschreibung" rows="3"></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="TicketUpload" class="form-label">Bitte wählen Sie ein Bild zum uploaden:</label>

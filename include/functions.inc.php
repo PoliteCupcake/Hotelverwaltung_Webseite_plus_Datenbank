@@ -335,7 +335,7 @@ function userUid_by_userId($conn, $userId)
     var_dump($userId);
     $stmt = mysqli_stmt_init($conn);
 
-    //if(!mysqli_stmt_prepare($stmt, "SELECT * FROM users;"))
+
     if(!mysqli_stmt_prepare($stmt, "SELECT usersUid FROM users WHERE usersId =" . $userId .";"))
     {
         header("location: ../index.php?currPage=edit_user&usersId=". $userId ."&error=stmtFaileduserUid_by_userId");
@@ -439,6 +439,29 @@ function editUserByAdmin($conn, $userId, $pwdChanged, $anrede, $lastname, $first
 }
 
 
+function createTicket($conn, $filepath, $title, $comment, $userid, $ticketStatus)
+{
+
+    $sql = "INSERT INTO  tickets (file_path, title, comment, user_id, ticketStatus) VALUES ( ?, ?, ?, ?, ? );"; 
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt, $sql))
+    {
+        header("location: ../index.php?currPage=createTicket&error=stmtFailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "sssss", $filepath, $title, $comment, $userid, $ticketStatus);
+    
+    if(mysqli_stmt_execute($stmt)){
+        mysqli_stmt_close($stmt);
+        header("location: ../index.php?currPage=myTicket&error=none");
+    }
+    mysqli_stmt_close($stmt);
+    
+}
+
+/*
+
 function createTicket($conn, $file_path, $title, $comment, $user_id)
 {
     $sql = "INSERT INTO tickets(file_path, title, comment, user_id) VALUES (?,?,?,?)";
@@ -461,7 +484,7 @@ function createTicket($conn, $file_path, $title, $comment, $user_id)
     mysqli_stmt_close($stmt);
 
 }
-
+*/
 
 function guidv4($data = null) {
     // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
