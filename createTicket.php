@@ -1,3 +1,13 @@
+<?php
+if($guest || $admin || $serviceTech)
+{
+
+$usersId = $_SESSION["userid"];
+
+include_once "include/dbaccess.inc.php";
+include_once "include/functions.inc.php";
+?>
+
 <!-- if guest || service || admin -->
 <div class="PageContent">
         <h2>Bildupload</h2>
@@ -25,3 +35,13 @@
         <!-- Datum angeben-->
     </div>
 <!-- else Bitte einloggen! -->
+
+    <?php
+}
+else
+{
+    echo '<p class="text-center">Unberechtigter Zugriff. Bitte anmelden oder Zugriffsrechte prüfen um Tickets zu erstellen.</p>';
+}
+
+
+?>
