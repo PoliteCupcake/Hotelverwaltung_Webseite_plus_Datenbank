@@ -1,22 +1,29 @@
 <?php
-if (isset($_POST["submit"]))
-{
-    $username = $_POST["username"];
-    $password = $_POST["password"];
+include_once "role.inc.php";
+if($anon){
 
-    require_once 'dbaccess.inc.php';
-    require_once 'functions.inc.php';
-
-    if( emptyInputLogin($username, $password) )
+    if (isset($_POST["submit"]))
     {
-        header("location: ../index.php?currPage=loginNew&error=emptyinput");
+        $username = $_POST["username"];
+        $password = $_POST["password"];
+
+        require_once 'dbaccess.inc.php';
+        require_once 'functions.inc.php';
+
+        if( emptyInputLogin($username, $password) )
+        {
+            header("location: ../index.php?currPage=loginNew&error=emptyinput");
+            exit();
+        }
+
+        loginUser($conn, $username, $password);
+    }
+    else
+    {
+        header("location: ../index.php?currPage=loginNew");
         exit();
     }
-
-    loginUser($conn, $username, $password);
 }
-else
-{
-    header("location: ../index.php?currPage=loginNew");
-    exit();
+else{
+    echo '<p>Sie sind bereits eingeloggt.</p>';
 }
