@@ -3,7 +3,7 @@ if(!isset($_SESSION)){
     session_start();
 }
 
-include_once "tempnewsfunction.inc.php";
+//include_once "tempnewsfunction.inc.php";
 include_once "functions.inc.php";
 include_once "dbaccess.inc.php";
 

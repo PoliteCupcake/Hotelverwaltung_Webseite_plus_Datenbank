@@ -521,3 +521,37 @@ function createNewsArticle($conn, $filepath, $newstitle, $article)
     mysqli_stmt_close($stmt);
     
 }
+
+function getNews($conn, $limit)
+{
+    $stmt = mysqli_stmt_init($conn);
+    $sql = "SELECT * FROM news ORDER BY newsdate desc LIMIT ? ;";
+    if(!mysqli_stmt_prepare($stmt, $sql))
+    {
+        header("location: index.php?currPage=news&error=stmtFailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "s", $limit );
+
+    mysqli_stmt_execute($stmt);
+
+    $resultNews = mysqli_stmt_get_result($stmt);
+    $limitedNews = array();
+    while($row = mysqli_fetch_assoc($resultNews))
+    {
+        $news['id'          ] = $row["newsid"       ];
+        $news['img_path'    ] = $row["newsfile_path"];
+        $news['title'       ] = $row["newstitle"    ];
+        $news['article'     ] = $row["newsarticle"  ];
+        $news['date'        ] = $row["newsdate"     ];
+  
+
+        $limitedNews[$news['id']] = $news;
+
+    }
+
+    mysqli_stmt_close($stmt);
+
+    return $limitedNews;
+}
