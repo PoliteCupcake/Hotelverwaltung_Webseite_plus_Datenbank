@@ -45,6 +45,8 @@
                 case "createNews": include "createNews.php";
                     break;
                 case "logout": include "logout.php"; break;
+                case "ticket": include "ticket.php"; break;
+
 
                 default: include "news.php";
 

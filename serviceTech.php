@@ -25,13 +25,15 @@ include_once "include/functions.inc.php";
             <!-- Table content procedurally made from DB -->
             <tbody>
 
+
+
             <?php
             $allTickets = getAllTickets($conn);
             foreach($allTickets as $ticket)
             {
                 echo '<tr>';
                 echo '<td>'. $ticket['id'] .'</td>';
-                echo '<td>'. $ticket['title'] .'</td>';
+                echo '<td>[ <a href="index.php?currPage=ticket&id='. $ticket['id'] .'">'. $ticket['title'] .'</a> ]</td>';
                 echo '<td><img src="./' . $ticket['img_path'] . '" height=30></td>';
                 echo '<td>'. $ticket['comment'] .'</td>';
                 echo '<td>'. userUid_by_userId($conn,$ticket['user_id']) .'</td>';

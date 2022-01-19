@@ -15,14 +15,14 @@ if(isset($_SESSION["userid"]) )
             <h2>Tickets</h2>
             <div class="PageContent">
 
-                <table class="table table-bordered table-dark">
+                <table class="table table-bordered table-striped">
                     <thead> <!-- Table head -->
                     <tr>
 
                         <th scope="col">Betreff</th>
                         <th scope="col">Ticketstatus</th>
                         <th scope="col">Erstellt</th>
-                        <th scope="col">Bearbeiten</th>
+                     <!--   <th scope="col">Bearbeiten</th> -->
 
                     </tr>
                     </thead>
@@ -34,11 +34,11 @@ if(isset($_SESSION["userid"]) )
                     foreach($allTickets as $ticket)
                     {
                         echo '<tr>';
-                        echo '<td>'. $ticket['title'] .'</td>';
+                        echo '<td><a href="index.php?currPage=ticket&id='. $ticket['id'] .'">'. $ticket['title'] .'</a></td>';
                         echo '<td>'. $ticket['ticketStatus'] .'</td>';
                         echo '<td>'. $ticket['created'] .'</td>';
 
-                        echo '<td>[ <a href="edit_user.php?user_id='. $ticket['user_id'] .'">bearbeiten</a> ]</td>';
+                       # echo '<td>[ <a href="edit_user.php?user_id='. $ticket['user_id'] .'">bearbeiten</a> ]</td>';
                         echo '</tr>';
 
                     }
