@@ -335,7 +335,7 @@ function userUid_by_userId($conn, $userId)
     var_dump($userId);
     $stmt = mysqli_stmt_init($conn);
 
-    //if(!mysqli_stmt_prepare($stmt, "SELECT * FROM users;"))
+
     if(!mysqli_stmt_prepare($stmt, "SELECT usersUid FROM users WHERE usersId =" . $userId .";"))
     {
         header("location: ../index.php?currPage=edit_user&usersId=". $userId ."&error=stmtFaileduserUid_by_userId");
