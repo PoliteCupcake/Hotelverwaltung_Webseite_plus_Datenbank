@@ -62,8 +62,8 @@ if($serviceTech || $admin || ($guest && $ticket['user_id'] === $_SESSION['userid
                                 {
                                 ?>
 
-                                    <form action="updateTicket.inc.php" method="POST">
-                                        <!--    <input type ="hidden" name="id" value=<?php echo $ticket['id']; ?>> -->
+                                    <form action="include/updateTicket.inc.php" method="POST">
+                                        <input type ="hidden" name="id" value=<?php echo $ticket['id']; ?>>
                                         <select name="status" size="1">
 
                                             <option value='open'
@@ -76,7 +76,7 @@ if($serviceTech || $admin || ($guest && $ticket['user_id'] === $_SESSION['userid
                                                 ?>
                                             >open</option>
 
-                                            <option value='s_closed'
+                                            <option value='successfully closed'
                                                 <?php
                                                 if($ticket['ticketStatus'] === 'successfully closed')
                                                 {
@@ -85,7 +85,7 @@ if($serviceTech || $admin || ($guest && $ticket['user_id'] === $_SESSION['userid
                                                 ?>
                                             >successfully closed</option>
 
-                                            <option value='u_closed'
+                                            <option value='unsuccessfully closed'
                                                 <?php
                                                 if($ticket['ticketStatus'] === 'unsuccessfully closed')
                                                 {
@@ -98,6 +98,32 @@ if($serviceTech || $admin || ($guest && $ticket['user_id'] === $_SESSION['userid
 
                                         <p><button type="submit" name="submit">update</button></p>
                                     </form>
+
+                                <?php
+                                }
+                                else if(($guest || $admin) && ($ticket['ticketStatus'] === 'unsuccessfully closed' || $ticket['ticketStatus'] === 'successfully closed' ))
+                                {
+                                    ?>
+                                    <form action="include/updateTicket.inc.php" method="POST">
+                                        <input type ="hidden" name="id" value=<?php echo $ticket['id']; ?>>
+                                <select name="status" size="1">
+
+                                    <option value='open'
+                                        <?php
+
+                                        if($ticket['ticketStatus'] === 'open')
+                                        {
+                                            echo "  selected";
+                                        }
+                                        ?>
+                                    ><?php echo $ticket['ticketStatus']; ?></option>
+
+
+                                </select>
+
+                                <p><button type="submit" name="submit">Erneut öffnen</button></p>
+                                </form>
+
 
                                 <?php
                                 }

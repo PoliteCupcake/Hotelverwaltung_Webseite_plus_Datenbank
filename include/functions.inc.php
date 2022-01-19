@@ -464,7 +464,7 @@ function updateTicket($conn,$status, $id)
 
     if(!mysqli_stmt_prepare($stmt, $sql))
     {
-        header("location: ../index.php?currPage=ticket&id=" . "$id" ."error=stmtFailedNoUpdate");
+        header("location: ../index.php?currPage=ticket&id=" . "$id" ."&error=stmtFailedNoUpdate");
         exit();
     }
 
@@ -472,11 +472,12 @@ function updateTicket($conn,$status, $id)
     if(!mysqli_stmt_execute($stmt))
     {
         mysqli_stmt_close($stmt);
-        header("location: ../index.phh?currPage=ticket&" . "$id" . "error=unsuccessfullUpdate");
+        header("location: ../index.php?currPage=ticket&id=" . "$id" . "&error=unsuccessfullUpdate");
     }
 
     mysqli_stmt_close($stmt);
-    header("location: ../index.phh?currPage=ticket&" . "$id" ."error=noneSuccessfullyUpdated");
+    header("location: ../index.php?currPage=ticket&id=" . "$id" ."&error=noneSuccessfullyUpdated");
+    exit();
 
 }
 

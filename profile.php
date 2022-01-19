@@ -98,7 +98,5 @@ include_once "include/functions.inc.php";
         <a class="nav-link" data-bs-toggle="collapse" href="#ChangePassword" role="button">Bearbeiten</a>
 
     </div>
-
-   
-
+    
 </div>
