@@ -54,7 +54,7 @@
                 <label class="col-md-4 text-md-end" for="role">Rolle: </label>
                 <select class="col-md-6" name="role" id="role">
                     <option selected name="role" value="guest">Gast</option>
-                    <option name="role" value="service">Techniker</option>
+                    <option name="role" value="serviceTech">Techniker</option>
                 </select>                
             </div>
             <div class="container row pb-2">

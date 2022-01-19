@@ -9,6 +9,7 @@ if(!isset($_SESSION)){
 if($guest || $admin || $serviceTech){
 
     $usersId = $_SESSION["userid"];
+
     include_once "include/dbaccess.inc.php";
     include_once "include/functions.inc.php";
 ?>
