@@ -48,6 +48,7 @@
                 case "ticket": include "ticket.php"; break;
 
 
+
                 default: include "news.php";
 
             }

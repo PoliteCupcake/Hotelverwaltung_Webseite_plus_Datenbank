@@ -13,6 +13,7 @@ if(!isset($_SESSION)){
 include_once "functions.inc.php";
 include_once "dbaccess.inc.php";
 
+
 $InputArr = array("file_path", "title", "comment");
 $uploadOk = 1;
 $uuid = guidv4();
