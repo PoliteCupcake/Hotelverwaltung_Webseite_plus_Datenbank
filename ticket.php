@@ -62,11 +62,13 @@ if($serviceTech || $admin || ($guest && $ticket['user_id'] === $_SESSION['userid
                                 {
                                 ?>
 
-                                    <form action="select.html" method="POST">
+                                    <form action="updateTicket.inc.php" method="POST">
+                                        <input type ="hidden" name="id" value=<?php echo $ticket['id']; ?>>
                                         <select name="status" size="1">
 
                                             <option value='open'
                                                 <?php
+
                                                 if($ticket['ticketStatus'] === 'open')
                                                 {
                                                     echo "  selected";
@@ -83,8 +85,6 @@ if($serviceTech || $admin || ($guest && $ticket['user_id'] === $_SESSION['userid
                                                 ?>
                                             >successfully closed</option>
 
-
-
                                             <option value='u_closed'
                                                 <?php
                                                 if($ticket['ticketStatus'] === 'unsuccessfully closed')
@@ -94,32 +94,17 @@ if($serviceTech || $admin || ($guest && $ticket['user_id'] === $_SESSION['userid
                                                 ?>
                                             >unsuccessfully closed</option>
 
-
                                         </select>
+
+                                        <p><button type="submit" name="submit">update</button></p>
                                     </form>
+
                                 <?php
-
-                               /*  if(isset($_POST["submit"]))
-                                 {
-                                     $status = $_POST["status"];
-                                 }
-
-                                 updateTicket($conn,$status);
-
-                              */
-                                }
-                                else
-                                {
-                                    echo $ticket['ticketStatus'];
                                 }
                                 ?>
 
 
                             </td>
-
-
-
-
                         </tbody>
                     </table>
 

@@ -47,10 +47,7 @@
                 case "logout": include "logout.php"; break;
                 case "ticket": include "ticket.php"; break;
 
-
-
                 default: include "news.php";
-
             }
         }
         else{
@@ -58,7 +55,6 @@
         }
 
         ?>
-
 
         <?php 
             include_once 'footer.php';
