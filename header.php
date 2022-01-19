@@ -60,12 +60,12 @@
 				</li>
             <?php } ?>
 
-            <!--- News erstellen -->
+            <!--- News erstellen Link is in Admin field
             <?php if($admin) { ?>
 				<li class="nav-item">
 				<a class="nav-link active" href="index.php?currPage=createNews">News erstellen</a>
 				</li>
-            <?php } ?>
+        	 <?php } ?> -->
 
             <!--- Meine Tickets -->
             <?php if($guest||$serviceTech||$admin) { ?>
@@ -84,7 +84,7 @@
             <!--- Alle User -->
             <?php if($admin) { ?>
 				<li class="nav-item">
-				<a class="nav-link active" href="index.php?currPage=admin">Alle User</a>
+				<a class="nav-link active" href="index.php?currPage=admin">Admin</a>
 				</li>
             <?php } ?>
         </ul>

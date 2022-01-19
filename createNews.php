@@ -11,11 +11,11 @@ kann News-Beiträge erstellen
 <div id="TicketUploadContainer">
     <form action="include/createNews.inc.php" method="post" enctype="multipart/form-data">
         <div class="mb-3">
-            <label for="NewsTitle" class="form-label">Titel:</label>
+            <label for="NewsTitle" class="form-label">Titel*:</label>
             <input type="text" name="NewsTitle" class="form-control" id="NewsTitle">
         </div>
         <div class="mb-3">
-            <label for="NewsArtikel" class="form-label">Artikel:</label>
+            <label for="NewsArtikel" class="form-label">Artikel*:</label>
             <textarea class="form-control" name="NewsArticle" id="NewsArtikel" rows="3"></textarea>
         </div>
         <div class="mb-3">

@@ -11,7 +11,10 @@
     <div class="PageContent text-center">
         <a class="btn btn-lg btn-primary" href="index.php?currPage=create_user">Neuen User erstellen!</a>  
     </div>
-       
+
+    <div class="PageContent text-center">
+        <a class="btn btn-lg btn-primary" href="index.php?currPage=createNews">News erstellen!</a>  
+    </div>
 <!--    <div class="PageContent">
         <h2>Neuen User anlegen</h2>
     </div> -->
