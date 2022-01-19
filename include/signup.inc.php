@@ -66,7 +66,7 @@ if(isset($_POST["submit"]))
     $typ = "guest";         //Options: anonym, guest, service, admin
     $status = "active";     //Options: active, inactive
 
-    createUser($conn, $anrede, $firstname, $lastname, $email, $username, $pwd, $typ, $status);
+    createUser($conn, $anrede, $lastname, $firstname, $email, $username, $pwd, $typ, $status);
 }
 
 
