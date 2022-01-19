@@ -3,10 +3,14 @@
 if(!isset($_SESSION)){
     session_start();
 }
-$usersId = $_SESSION["userid"];
 
-include_once "include/dbaccess.inc.php";
-include_once "include/functions.inc.php";
+
+// check user role closed at the end of the page
+if($guest || $admin || $serviceTech){
+
+    $usersId = $_SESSION["userid"];
+    include_once "include/dbaccess.inc.php";
+    include_once "include/functions.inc.php";
 ?>
 
 <div class="PageWrap">
@@ -73,6 +77,11 @@ include_once "include/functions.inc.php";
             </div>
         </div>    
         <a class="nav-link" data-bs-toggle="collapse" href="#ChangeUsername" role="button">Bearbeiten</a>
-    </div>
-
+    </div> 
 </div>
+<?php 
+}
+else{
+    echo '<p>Unberechtigter Zugriff. Bitte anmelden oder Zugriffsrechte prüfen.</p>';
+}
+?>

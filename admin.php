@@ -1,6 +1,9 @@
 <?php
-   include_once "include/dbaccess.inc.php";
-   include_once "include/functions.inc.php";
+if($admin){
+
+    $usersId = $_SESSION["userid"];
+    include_once "include/dbaccess.inc.php";
+    include_once "include/functions.inc.php";
 ?>
 
 <div class="PageWrap">
@@ -53,6 +56,10 @@
         </table>
 
     </div>
-
-
 </div>
+<?php 
+}
+else{
+    echo '<p>Unberechtigter Zugriff. Bitte anmelden oder Zugriffsrechte prüfen.</p>';
+}
+?>
