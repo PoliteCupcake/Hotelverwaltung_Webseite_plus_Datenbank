@@ -25,7 +25,7 @@ $target_file = $target_dir . $uuid. "." . $imageFileType;
 
 
 // Überprüfung ob Bild echtes Bild ist
-if(isset($_POST["submit"]))
+if(isset($_POST["TicketSubmit"])) //submit to TicketSubmit
 {
     $check = getimagesize($_FILES["TicketUpload"]["tmp_name"]);
     if($check !== false)

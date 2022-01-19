@@ -32,7 +32,7 @@
                     break;
                 case "loginNew": include "loginNew.php";
                     break;
-                case "createUser": include "createUser.php";
+                case "create_user": include "create_user.php";
                     break;
                 case "edit_user": include "edit_user.php"; // case: edit_user&
                     break;

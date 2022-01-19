@@ -8,7 +8,10 @@
     <h1>Admin</h1>
 
     <p>ACHTUNG! Einige Änderungen die auf dieser Seite vorgenommen werden haben eventuell Folgen für die Benutzer!</p>
-    <a href="index.php?currPage=create_user">Neuen User erstellen!</a>     
+    <div class="PageContent text-center">
+        <a class="btn btn-lg btn-primary" href="index.php?currPage=create_user">Neuen User erstellen!</a>  
+    </div>
+       
 <!--    <div class="PageContent">
         <h2>Neuen User anlegen</h2>
     </div> -->
@@ -32,15 +35,15 @@
 
              <?php
                  $allUsers = getAllUsers($conn);
-		 foreach($allUsers as $user)
-                 {
+		        foreach($allUsers as $user)
+                {
                     echo '<tr>';
                     echo '<td>'. $user['username'] .'</td>';
                     echo '<td>'. $user['firstname'] . ' ' . $user['lastname'] .'</td>';
                     echo '<td>'. $user['role'] .'</td>';
                     echo '<td>[ <a href="index.php?currPage=edit_user&usersId='. $user['usersId'] .'">bearbeiten</a> ]</td>';
                     echo '</tr>';
-                 }
+                }
               ?>
 
             </tbody>

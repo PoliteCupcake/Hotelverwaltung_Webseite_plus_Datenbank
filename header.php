@@ -34,58 +34,58 @@
             
             <!--- NEWS -->
             <?php if(true) { ?>
-	    <li class="nav-item">
-		<a class="nav-link active" href="index.php?currPage=news">News</a>
-	    </li>
+				<li class="nav-item">
+				<a class="nav-link active" href="index.php?currPage=news">News</a>
+				</li>
             <?php } ?>
 
             <!--- Impressum -->
             <?php if(true) { ?>
-	    <li class="nav-item">
-		<a class="nav-link active" href="index.php?currPage=impressum">Impressum</a>
-	    </li>
+				<li class="nav-item">
+				<a class="nav-link active" href="index.php?currPage=impressum">Impressum</a>
+				</li>
             <?php } ?>
 
             <!--- Hilfe -->
             <?php if(true) { ?>
-	    <li class="nav-item">
-		<a class="nav-link active" href="index.php?currPage=help">Hilfe</a>
-	    </li>
+				<li class="nav-item">
+				<a class="nav-link active" href="index.php?currPage=help">Hilfe</a>
+				</li>
             <?php } ?>
 
             <!--- Profil -->
             <?php if($guest||$serviceTech||$admin) { ?>
-	    <li class="nav-item">
-		<a class="nav-link active" href="index.php?currPage=profile">Profil</a>
-	    </li>
+				<li class="nav-item">
+				<a class="nav-link active" href="index.php?currPage=profile">Profil</a>
+				</li>
             <?php } ?>
 
             <!--- News erstellen -->
             <?php if($admin) { ?>
-	    <li class="nav-item">
-		<a class="nav-link active" href="index.php?currPage=createNews">News erstellen</a>
-	    </li>
+				<li class="nav-item">
+				<a class="nav-link active" href="index.php?currPage=createNews">News erstellen</a>
+				</li>
             <?php } ?>
 
             <!--- Meine Tickets -->
             <?php if($guest||$serviceTech||$admin) { ?>
-	    <li class="nav-item">
-		<a class="nav-link active" href="index.php?currPage=myTickets">Meine Tickets</a>
-	    </li>
+				<li class="nav-item">
+				<a class="nav-link active" href="index.php?currPage=myTickets">Meine Tickets</a>
+				</li>
             <?php } ?>
 
             <!--- Alle Tickets -->
             <?php if($serviceTech||$admin) { ?>
-	    <li class="nav-item">
-		<a class="nav-link active" href="index.php?currPage=allTickets">Alle Tickets</a>
-	    </li>
+				<li class="nav-item">
+				<a class="nav-link active" href="index.php?currPage=allTickets">Alle Tickets</a>
+				</li>
             <?php } ?>
 
             <!--- Alle User -->
             <?php if($admin) { ?>
-	    <li class="nav-item">
-		<a class="nav-link active" href="index.php?currPage=allUsers">Alle User</a>
-	    </li>
+				<li class="nav-item">
+				<a class="nav-link active" href="index.php?currPage=admin">Alle User</a>
+				</li>
             <?php } ?>
         </ul>
 
@@ -95,24 +95,24 @@
 
             <!--- Login -->
             <?php if($anon) { ?>
-	    <li class="nav-item">
-		<a class="nav-link active" href="index.php?currPage=loginNew">Login</a>
-	    </li>
+				<li class="nav-item">
+				<a class="nav-link active" href="index.php?currPage=loginNew">Login</a>
+				</li>
             <?php } ?>
 
             <!--- Registrieren -->
             <?php if($anon) { ?>
-	    <li class="nav-item">
-		<a class="nav-link active" href="index.php?currPage=signup">Registrieren</a>
-	    </li>
+				<li class="nav-item">
+				<a class="nav-link active" href="index.php?currPage=signup">Registrieren</a>
+				</li>
             <?php } ?>
 
 	    <!--- Logout -->
             <?php if($guest||$serviceTech||$admin) { ?>
-	    <li class="nav-item">
-                <div><?php echo $_SESSION["useruid"]." (<i>".$_SESSION["userRole"].")</i>"; ?></div>
-		<a class="nav-link active" href="index.php?currPage=logout">Logout</a>
-	    </li>
+				<li class="nav-item">
+				<div><?php echo $_SESSION["useruid"]." (<i>".$_SESSION["userRole"].")</i>"; ?></div>
+				<a class="nav-link active" href="index.php?currPage=logout">Logout</a>
+				</li>
             <?php } ?>
 
         </ul>

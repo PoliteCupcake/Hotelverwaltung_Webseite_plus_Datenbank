@@ -499,3 +499,25 @@ function guidv4($data = null) {
     // Output the 36 character UUID.
     return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
 }
+
+
+function createNewsArticle($conn, $filepath, $newstitle, $article)
+{
+
+    $sql = "INSERT INTO  news (newsfile_path, newstitle, newsarticle) VALUES ( ?, ?, ? );"; 
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt, $sql))
+    {
+        header("location: ../index.php?currPage=createNews&error=stmtFailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "sss", $filepath, $newstitle, $article);
+    
+    if(mysqli_stmt_execute($stmt)){
+        mysqli_stmt_close($stmt);
+        header("location: ../index.php?currPage=createNews&error=none");
+    }
+    mysqli_stmt_close($stmt);
+    
+}
