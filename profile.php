@@ -13,14 +13,14 @@ include_once "include/functions.inc.php";
         <div class="collapse" id="ChangeName">
             <div class="card card-body">
                 <div>
-                <form action="index.php" method="post">
+                <form action="include/editProfile.inc.php" method="post">
                     <div class="container row pb-2">
-                        <label class="col-md-4 text-md-end" for="Vorname">Neuer Vorname: </label>
-                        <input class="col-md-6" type="text" name="Vorname">                        
+                        <label class="col-md-4 text-md-end" for="ChangeFirstname">Neuer Vorname: </label>
+                        <input class="col-md-6" type="text" name="ChangeFirstname">                        
                     </div>
                     <div class="container row pb-2">
-                        <label class="col-md-4 text-md-end" for="Nachname">Neuer Nachname: </label>
-                        <input class="col-md-6" type="text" name="Nachname">                        
+                        <label class="col-md-4 text-md-end" for="ChangeLastname">Neuer Nachname: </label>
+                        <input class="col-md-6" type="text" name="ChangeLastname">                        
                     </div>
                     <div class="text-end"> 
                         <button class="btn btn-primary btn-sm" name="ChangeName" type="submit">Ändern</button>
@@ -36,7 +36,7 @@ include_once "include/functions.inc.php";
         <div class="collapse" id="ChangeEmail">
             <div class="card card-body">
                 <div>
-                <form action="index.php" method="post">
+                <form action="include/editProfile.inc.php" method="post">
                     <div class="container row pb-2">
                         <label class="col-md-4 text-md-end" for="email">Neue E-Mail: </label>
                         <input class="col-md-6" type="text" name="email">                        
@@ -51,52 +51,24 @@ include_once "include/functions.inc.php";
         </div>
         <a class="nav-link" data-bs-toggle="collapse" href="#ChangeEmail" role="button">Bearbeiten</a>
 
-        <p class="border-top mt-3">Adresse:</p>
-        <div class="collapse" id="ChangeAdress">
+        <p class="border-top mt-3">Benutzername:</p>
+        <div class="collapse" id="ChangeUsername">
             <div class="card card-body">
                 <div>
-                <form action="index.php" method="post">
+                <form action="include/editProfile.inc.php" method="post">
                     <div class="container row pb-2">
-                        <label class="col-md-4 text-md-end" for="Strasse">Straße: </label>
-                        <input class="col-md-6" type="text" name="Strasse">                        
-                    </div>
-                    <div class="container row pb-2">
-                        <label class="col-md-4 text-md-end" for="Ort">Ort: </label>
-                        <input class="col-md-6" type="text" name="Ort">                        
-                    </div>
-                    <div class="container row pb-2">
-                        <label class="col-md-4 text-md-end" for="Plz">Plz: </label>
-                        <input class="col-md-6" type="text" name="Plz">                        
+                        <label class="col-md-4 text-md-end" for="ChangeUsername">Neuer Benutzername: </label>
+                        <input class="col-md-6" type="text" name="ChangeUsername">                        
                     </div>
                     <div class="text-end">
-                        <button class="btn btn-primary btn-sm" name="ChangeAdress" type="submit">Ändern</button>
-                        <button class="btn btn-secondary btn-sm" name="ChangeAdressClose" type="reset" data-bs-toggle="collapse" data-bs-target="#ChangeAdress" aria-expanded="false" aria-controls="collapseExample">Schließen</button>                        
+                        <button class="btn btn-primary btn-sm" name="ChangeUsername" type="submit">Ändern</button>
+                        <button class="btn btn-secondary btn-sm" name="ChangeUsername" type="reset" data-bs-toggle="collapse" data-bs-target="#ChangeUsername" aria-expanded="false" aria-controls="collapseExample">Schließen</button>                        
                     </div>
                 </form>
                 </div>
             </div>
         </div>    
-        <a class="nav-link" data-bs-toggle="collapse" href="#ChangeAdress" role="button">Bearbeiten</a>
-        
-        <p class="border-top mt-3">Passwort ändern...</p>
-        <div class="collapse" id="ChangePassword">
-            <div class="card card-body">
-                <div>
-                <form action="index.php" method="post">
-                    <div class="container row pb-2">
-                        <label class="col-md-4 text-md-end" for="Password">Neues Passwort: </label>
-                        <input class="col-md-6" type="password" name="Passwort">                        
-                    </div>
-                    <div class="text-end">
-                        <button class="btn btn-primary btn-sm" name="ChangePassword" type="submit">Ändern</button>
-                        <button class="btn btn-secondary btn-sm" name="ChangePasswordClose" type="reset" data-bs-toggle="collapse" data-bs-target="#ChangePassword" aria-expanded="false" aria-controls="collapseExample">Schließen</button>                        
-                    </div>
-                </form>
-                </div>
-            </div>
-        </div>
-        <a class="nav-link" data-bs-toggle="collapse" href="#ChangePassword" role="button">Bearbeiten</a>
-
+        <a class="nav-link" data-bs-toggle="collapse" href="#ChangeUsername" role="button">Bearbeiten</a>
     </div>
     
 </div>
