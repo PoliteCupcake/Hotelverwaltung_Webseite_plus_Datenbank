@@ -74,5 +74,5 @@ include_once "include/functions.inc.php";
         </div>    
         <a class="nav-link" data-bs-toggle="collapse" href="#ChangeUsername" role="button">Bearbeiten</a>
     </div>
-    
+
 </div>

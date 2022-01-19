@@ -48,20 +48,41 @@ if($serviceTech || $admin || ($guest && $ticket['user_id'] === $_SESSION['userid
                             <th scope="col">Erstellt von</th>
                             <th scope="col">Datum</th>
                             <th scope="col">Status</th>
+
+
+                            <?php
+                            if($serviceTech)
+                            {
+                                ?>
+
+                                <th scope="col">Update</th>
+
+                            <?php
+
+                            }
+                            elseif(($guest || $admin) && ($ticket['ticketStatus'] !== "open" ))
+                            {
+                                ?>
+                                <th scope="col">Ticket wieder öffnen</th>
+                            <?php
+                            }
+                            ?>
+
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <th scope="row"><?php echo $user_name; ?></th>
+                            <td><?php echo $user_name; ?></td>
                             <td><?php echo $ticket['created']; ?></td>
-                            <td>
+
+
 
                                 <?php
 
                                 if($serviceTech)
                                 {
                                 ?>
-
+                                    <td>
                                     <form action="include/updateTicket.inc.php" method="POST">
                                         <input type ="hidden" name="id" value=<?php echo $ticket['id']; ?>>
                                         <select name="status" size="1">
@@ -95,48 +116,40 @@ if($serviceTech || $admin || ($guest && $ticket['user_id'] === $_SESSION['userid
                                             >unsuccessfully closed</option>
 
                                         </select>
-
-                                        <p><button type="submit" name="submit">update</button></p>
                                     </form>
+                                    </td>
+
+                                        <td><button type="submit" name="submit">update</button></td>
+
 
                                 <?php
                                 }
-                                else if(($guest || $admin) && ($ticket['ticketStatus'] === 'unsuccessfully closed' || $ticket['ticketStatus'] === 'successfully closed' ))
+                                else if(($guest || $admin) && ($ticket['ticketStatus'] !== 'open'))
                                 {
                                     ?>
+                                    <td><?php echo $ticket['ticketStatus']; ?></td>
+
+                                    <td>
                                     <form action="include/updateTicket.inc.php" method="POST">
                                         <input type ="hidden" name="id" value=<?php echo $ticket['id']; ?>>
-                                <select name="status" size="1">
+                                        <input type ="hidden" name="status" value="open">
 
-                                    <option value='open'
-                                        <?php
+                                        <button type="submit" name="submit">Bestätigen</button>
 
-                                        if($ticket['ticketStatus'] === 'open')
-                                        {
-                                            echo "  selected";
-                                        }
-                                        ?>
-                                    ><?php echo $ticket['ticketStatus']; ?></option>
-
-
-                                </select>
-
-                                <p><button type="submit" name="submit">Erneut öffnen</button></p>
-                                </form>
-
+                                    </form>
+                                    </td>
 
                                 <?php
                                 }
                                 else
                                 {
                                     ?>
-                                 <td><?php echo $ticket['ticketStatus']; ?></td>
+                                    <td> <?php echo $ticket['ticketStatus'];?> </td>
                                 <?php
                                 }
                                 ?>
 
 
-                            </td>
                         </tbody>
                     </table>
 
