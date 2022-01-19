@@ -6,7 +6,7 @@ include_once "include/functions.inc.php";
 
 
 <div class="PageWrap">
-
+<!--kann das weg oder ist das kunst? -->
     <h2>Tickets</h2>
     <div class="PageContent">
 

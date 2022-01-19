@@ -53,7 +53,7 @@ if(isset($_SESSION["userid"])  )
 }
 else
 {
-    echo "<p>Error</p>";
+    echo '<p class="text-center">Unberechtigter Zugriff! Bitte anmelden oder Zugriffsrechte prüfen um Tickets zu sehen</p>';
 }
 ?>
 

@@ -1,12 +1,15 @@
 
 <?php
+
+
+
 if(!isset($_SESSION)){
     session_start();
 }
 
 
 // check user role closed at the end of the page
-if($guest || $admin || $serviceTech){
+if($admin){
 
     $usersId = $_SESSION["userid"];
 

@@ -12,7 +12,7 @@
     require_once "include/functions.inc.php";
     
     if(isset($_GET["inputError"])){
-        echo "<p>error</p>";
+        echo '<p class="text-center">Ungültige Eingabe. Bitte Eingabe vervollständigen.</p>';
     }
 ?>
 <!--
@@ -55,16 +55,14 @@
                 <input class="col-md-6" type="password" name="pwd"           placeholder="<?php if(isset($ErrorArr)){echo $ErrorArr["pwd"];} ?>">
             </div>
             <div class="container row pb-2">
-                <label class="col-md-4 text-md-end" for="pwdRepeat">Passwort wiederhgolen*:</label>
+                <label class="col-md-4 text-md-end" for="pwdRepeat">Passwort wiederholen*:</label>
                 <input class="col-md-6" type="password" name="pwdRepeat" >
             </div>
-            <button type="submit"  name="submit">Sign up </button>
+            <button  type="submit"  name="submit">Sign up </button>
 
         </form>
     </div>
 </div>
-<?php
 
-?>
 </body>
 </html>

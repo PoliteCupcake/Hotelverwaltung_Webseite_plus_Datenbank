@@ -54,17 +54,12 @@ if(isset($_SESSION["userid"]) )
         </div>
 
 
-
-
-
-
-
-
 <?php
     }
-    else
-    {
-        echo "<p>Error</p>";
-    }
+else
+{
+    echo '<p class="text-center">Unberechtigter Zugriff. Bitte anmelden oder Zugriffsrechte prüfen.</p>';
+}
+
 }
 ?>
