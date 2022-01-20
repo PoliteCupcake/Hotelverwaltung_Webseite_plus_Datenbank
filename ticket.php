@@ -88,6 +88,28 @@ if($serviceTech || $admin || ($guest && $ticket['user_id'] === $_SESSION['userid
             <div class="col"><?php echo $ticket['comment']; ?></div>
         </div>
     </div>
-<?php } else { ?>
+    <div class="PageWrap">
+        <h2>Antworten auf dieses Ticket</h2>
+        <div class="PageContent">
+            <p>Bisher keine Antworten.</p>
+        </div>
+    </div>
+
+<?php if($serviceTech) { ?>
+<div class="PageWrap">
+    <h2>Auf dieses Ticket antworten?</h2>
+    <div class="PageContent">
+        <form action="" method="post">
+            <div class="mb-3">
+                <label for="reply" class="form-label">Antwort schreiben:</label>
+                <textarea class="form-control" name="reply" id="reply" rows="5"></textarea>
+            </div>
+            <input type="hidden" id="ticketId" name="ticketId" value="<?php echo $ticket['id'] ?>">
+            <p><button type="submit" name="submit">Antwort senden</button></p>
+        </form>
+    </div>
+</div>
+<?php } } else { ?>
     <p class="text-center">Unberechtigter Zugriff! Bitte anmelden oder Zugriffsrechte prüfen um Tickets zu sehen</p>
 <?php } ?>
+
