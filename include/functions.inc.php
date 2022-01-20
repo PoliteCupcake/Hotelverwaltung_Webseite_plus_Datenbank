@@ -510,6 +510,7 @@ function createTicket($conn, $file_path, $title, $comment, $user_id)
 }
 */
 
+
 function guidv4($data = null)
 {
     // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
@@ -666,6 +667,7 @@ function userFirstName_by_userId($conn, $userId)
     mysqli_stmt_close($stmt);
     return $firstname;
 }
+
 
 function userLastName_by_userId($conn, $userId)
 {

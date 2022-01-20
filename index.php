@@ -9,6 +9,7 @@
 
     <body>
         <?php
+        include_once 'include/role.inc.php';
         include_once 'header.php';
         // Some error handling
         if(isset($_GET["access"])){

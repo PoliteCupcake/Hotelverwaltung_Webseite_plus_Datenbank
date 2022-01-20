@@ -1,21 +1,3 @@
-<?php
-	$anon        = false;
-	$guest       = false;
-	$serviceTech = false;
-	$admin       = false;
-	session_start();
-	if( isset($_SESSION["userid"]) )
-	{
-		switch($_SESSION["userRole"])
-		{
-			case "guest"      : $guest       = true; break;
-			case "serviceTech": $serviceTech = true; break;
-			case "admin"      : $admin       = true; break;
-		}
-	}
-	else
-		$anon = true;
-?>
 
 <header class="text-center bg-gradient">
     <img id="headerImg" class="img-fluid " src="images/header_img.jpg" alt="Picture of a big pool with little huts">

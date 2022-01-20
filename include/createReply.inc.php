@@ -1,14 +1,16 @@
 <?php
 
+require_once 'role.inc.php';
+
 // check if user is a serviceTech anyway
-/*if(!$serviceTech)
+if(!$serviceTech)
 {
     // user is not a serviceTech.
     // in this case, user is anyways not allowed to create replies. Therefore,
     // send user to our landing page
-    //header("location: ../index.php");
-    //exit();
-}*/
+    header("location: ../index.php");
+    exit();
+}
 
 // check if a POST from a form to this script has (not) occured
 if (!isset($_POST["submit"]))
