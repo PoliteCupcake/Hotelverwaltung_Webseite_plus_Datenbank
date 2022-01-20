@@ -6,6 +6,22 @@ if($admin)
 $usersId = $_SESSION["userid"];
 include_once "include/dbaccess.inc.php";
 include_once "include/functions.inc.php";
+
+if(isset($_GET["error"])){
+    switch($_GET["error"]){
+        case "requiredMissing": echo '<p>Ihre Eingaben sind nicht korrekt oder unvollständig.</p>';
+            break;
+        case "POSTnotSent":echo '<p>POST Request ist schief gelaufen.</p>';
+            break;
+        default: echo '<p>Nicht spezifizierter Error.</p>';
+    }
+}
+if(isset($_GET["success"])){
+    if($_GET["success"] == 1){
+        echo '<p>News erfolgreich gepostet.</p>';
+    }
+}
+
 ?>
 <div class="PageContent">
 <h2>News erstellen</h2>

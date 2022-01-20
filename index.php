@@ -10,7 +10,15 @@
     <body>
         <?php
         include_once 'header.php';
-
+        // Some error handling
+        if(isset($_GET["access"])){
+            switch($_GET["access"]){
+                case "denied": echo '<p>Unberechtigter Zugriff. Bitte anmelden oder Zugriffsrechte prüfen.</p>';
+                    break;
+                case "loggedin": echo '<p>Sie sind bereits eingeloggt.</p>';
+                    break;
+            }
+        }
         // Login status if else 
         // echos content of the current page
         if(isset($_GET["currPage"])){
@@ -52,14 +60,6 @@
         }
         else{
             include "news.php";
-        }
-        if(isset($_GET["access"])){
-            switch($_GET["access"]){
-                case "denied": echo '<p>Unberechtigter Zugriff. Bitte anmelden oder Zugriffsrechte prüfen.</p>';
-                    break;
-                case "loggedin": echo '<p>Sie sind bereits eingeloggt.</p>';
-                    break;
-            }
         }
 
         ?>

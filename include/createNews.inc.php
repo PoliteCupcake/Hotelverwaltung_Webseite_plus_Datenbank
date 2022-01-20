@@ -56,14 +56,15 @@ if($admin){
                         $newstitle = $_POST["NewsTitle"];
                         $article = $_POST["NewsArticle"];
                         createNewsArticle($conn, $filepath, $newstitle, $article);
-                        header("location: ../index.php?currPage=createNews&success");  
+                        header("location: ../index.php?currPage=createNews&success=1");  
                     }
                     else{
-                        header("location: ../index.php?currPage=createNews&requiredMissing");
+                        header("location: ../index.php?currPage=createNews&error=requiredMissing");
                         //echo "Bitte Titel und Artikel ausfüllen!";
                     }
-
+ 
                 }
+
                 else{
                     header("location: ../index.php?currPage=createNews&error=POSTnotSent");
                 }
@@ -80,10 +81,10 @@ if($admin){
                 $newstitle = $_POST["NewsTitle"];
                 $article = $_POST["NewsArticle"];
                 createNewsArticle($conn, $filepath, $newstitle, $article);
-                header("location: ../index.php?currPage=createNews&success");
+                header("location: ../index.php?currPage=createNews&success=1");
             }
             else{
-                header("location: ../index.php?currPage=createNews&requiredMissing");
+                header("location: ../index.php?currPage=createNews&error=requiredMissing");
                 //echo "Bitte Titel und Artikel ausfüllen!";
             }
         }

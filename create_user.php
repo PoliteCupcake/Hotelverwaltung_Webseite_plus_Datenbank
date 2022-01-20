@@ -17,8 +17,16 @@ include_once "include/functions.inc.php";
     
     require_once "include/functions.inc.php";
     
-    if(isset($_GET["inputError"])){
-        echo "<p>error</p>";
+
+    // Some error handling
+    if(isset($_GET["Error"])){
+        switch($_GET["Error"]){
+            case "wrongInputs": echo '<p>Ihre Eingaben sind nicht korrekt oder unvollständig.</p>';
+                break;
+            case "POSTnotSent":echo '<p>POST Request ist schief gelaufen.</p>';
+                break;
+            default: echo '<p>Nicht spezifizierter Error.</p>';
+        }
     }
 ?>
 

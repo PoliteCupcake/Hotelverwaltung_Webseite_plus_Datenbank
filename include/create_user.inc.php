@@ -48,7 +48,7 @@ if($admin){
     $_SESSION["signUpErrors"] = $ErrorArr;
 
     if(signUpError($stringInputArr, $ErrorArr)){
-        header("location: ../index.php?currPage=create_user&inputError=wrongInputs");
+        header("location: ../index.php?currPage=create_user&Error=wrongInputs");
         exit(); 
     }
 
