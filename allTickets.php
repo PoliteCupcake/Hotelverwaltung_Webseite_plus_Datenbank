@@ -20,7 +20,21 @@ if(isset($_SESSION["userid"]) )
                     <tr>
 
                         <th scope="col">Betreff</th>
-                        <th scope="col">Ticketstatus</th>
+                        <th scope="col">
+                            Ticketstatus
+                            <?php if($serviceTech) { ?>
+                            <form action="index.php" method="GET">
+                                <input type="hidden" name="currPage" value="allTickets">
+                                <select name="filter" size="1">
+                                    <option value='none'                  <?php if(!isset($_GET["filter"]) || (isset($_GET["filter"]) &&  $_GET["filter"] === 'none' )) echo " selected"; ?> >                     </option>
+                                    <option value='open'                  <?php if( isset($_GET["filter"]) &&  $_GET["filter"] === 'open'                              ) echo " selected"; ?> >open                 </option>
+                                    <option value='successfullyclosed'    <?php if( isset($_GET["filter"]) &&  $_GET["filter"] === 'successfullyclosed'                ) echo " selected"; ?> >successfully closed  </option>
+                                    <option value='unsuccessfullyclosed'  <?php if( isset($_GET["filter"]) &&  $_GET["filter"] === 'unsuccessfullyclosed'              ) echo " selected"; ?> >unsuccessfully closed</option>
+                                </select>
+                            <button type="submit">filtern</button>
+                            </form>
+                            <?php } ?>
+                        </th>
                         <th scope="col">Erstellt</th>
                      <!--   <th scope="col">Bearbeiten</th> -->
 
@@ -30,17 +44,31 @@ if(isset($_SESSION["userid"]) )
                     <tbody>
 
                     <?php
+                    $filter = "none";
+                    if($serviceTech)
+                    {
+                        if( isset($_GET["filter"]) )
+                        {
+                            switch ($_GET["filter"])
+                            {
+                                case 'open'                : $filter = "open"                 ; break;
+                                case 'successfullyclosed'  : $filter = "successfully closed"  ; break;
+                                case 'unsuccessfullyclosed': $filter = "unsuccessfully closed"; break;
+                            }
+                        }
+                    }
+
                     $allTickets = getAllTickets($conn);
                     foreach($allTickets as $ticket)
                     {
-                        echo '<tr>';
-                        echo '<td><a href="index.php?currPage=ticket&id='. $ticket['id'] .'">'. $ticket['title'] .'</a></td>';
-                        echo '<td>'. $ticket['ticketStatus'] .'</td>';
-                        echo '<td>'. $ticket['created'] .'</td>';
-
-                       # echo '<td>[ <a href="edit_user.php?user_id='. $ticket['user_id'] .'">bearbeiten</a> ]</td>';
-                        echo '</tr>';
-
+                        if($filter==="none" || $filter===$ticket['ticketStatus'])
+                        {
+                            echo '<tr>';
+                            echo '<td><a href="index.php?currPage=ticket&id=' . $ticket['id'] . '">' . $ticket['title'] . '</a></td>';
+                            echo '<td>' . $ticket['ticketStatus'] . '</td>';
+                            echo '<td>' . $ticket['created'] . '</td>';
+                            echo '</tr>';
+                        }
                     }
                     ?>
 
