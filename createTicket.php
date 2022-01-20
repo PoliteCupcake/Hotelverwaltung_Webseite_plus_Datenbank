@@ -1,19 +1,19 @@
+<div class="PageWrap">
+
 <?php
 if($guest || $admin || $serviceTech)
 {
 
-$usersId = $_SESSION["userid"];
-
 include_once "include/dbaccess.inc.php";
 include_once "include/functions.inc.php";
 ?>
-
-<!-- if guest || service || admin -->
-<div class="PageContent">
+    <div class="PageContent">
         <h2>Bildupload</h2>
+
         <p>Hier können Sie Bilder hochladen über Mängel oder Schäden die Sie melden möchten. Zusätzlich können Sie ein Datum und eine Uhrzeit wählen, zu welcher einer unsererer Servicetechniker vorbeikommen kann.</p>
-        <!-- Bildupload-->
+
         <div id="TicketUploadContainer">
+
             <form action="include/createTicket.inc.php" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="TicketBetreff" class="form-label">Betreffend...</label>
@@ -31,17 +31,15 @@ include_once "include/functions.inc.php";
                     <button class="btn btn-primary" name="TicketSubmit" type="submit">Ticket senden</button>
                 </div>
             </form>
-        </div>
-        <!-- Datum angeben-->
-    </div>
-<!-- else Bitte einloggen! -->
 
-    <?php
+        </div>
+
+    </div>
+<?php
 }
 else
 {
     echo '<p class="text-center">Unberechtigter Zugriff. Bitte anmelden oder Zugriffsrechte prüfen um Tickets zu erstellen.</p>';
 }
-
-
 ?>
+</div>
