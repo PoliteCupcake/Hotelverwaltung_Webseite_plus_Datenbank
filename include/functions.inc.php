@@ -691,3 +691,58 @@ function userLastName_by_userId($conn, $userId)
     mysqli_stmt_close($stmt);
     return $lastname;
 }
+
+function createReply($conn, $ticketId, $reply)
+{
+
+    $sql = "INSERT INTO ticketreplies (reply, ticketId) VALUES (?,?);";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt, $sql))
+    {
+        header("location: ../index.php?currPage=ticket&id=". $ticketId ."&error=stmtFailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "ss", $reply, $ticketId);
+
+    if(mysqli_stmt_execute($stmt))
+    {
+        mysqli_stmt_close($stmt);
+        header("location: ../index.php?currPage=ticket&id=". $ticketId ."&error=replyAdded");
+    }
+    mysqli_stmt_close($stmt);
+
+}
+
+function getTicketReplies($conn, $ticketId)
+{
+    $sql = "SELECT * FROM ticketreplies WHERE ticketId=?";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt, $sql))
+    {
+        mysqli_stmt_close($stmt);
+        return false;
+    }
+    mysqli_stmt_bind_param($stmt, "s", $ticketId);
+    if(!mysqli_stmt_execute($stmt))
+    {
+        mysqli_stmt_close($stmt);
+        return false;
+    }
+    else
+    {
+        $resultData = mysqli_stmt_get_result($stmt);
+        $allReplies = array();
+        while ($row = mysqli_fetch_assoc($resultData))
+        {
+            $reply['id'      ] = $row["id"      ];
+            $reply['reply'   ] = $row["reply"   ];
+            $reply['ticketId'] = $row["ticketId"];
+            $reply['created' ] = $row["created" ];
+
+            $allReplies[$reply['id']] = $reply;
+        }
+        mysqli_stmt_close($stmt);
+        return $allReplies;
+    }
+}

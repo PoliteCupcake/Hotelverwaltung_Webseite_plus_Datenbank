@@ -90,16 +90,30 @@ if($serviceTech || $admin || ($guest && $ticket['user_id'] === $_SESSION['userid
     </div>
     <div class="PageWrap">
         <h2>Antworten auf dieses Ticket</h2>
-        <div class="PageContent">
-            <p>Bisher keine Antworten.</p>
-        </div>
+        <?php
+            $allReplies = getTicketReplies($conn, $ticket['id']);
+            if(!$allReplies)
+            {
+                echo '<div class="PageContent"><p>Bisher keine Antworten.</p></div>';
+            }
+            else
+            {
+                foreach ($allReplies as $reply)
+                {
+                    echo '<div class="PageContent">';
+                    echo '<p>' . $reply["reply"] . '</p>';
+                    echo '<p><i>geschrieben am:</i> ' . $reply["created"] . '</p>';
+                    echo '</div>';
+                }
+            }
+        ?>
     </div>
 
 <?php if($serviceTech) { ?>
 <div class="PageWrap">
     <h2>Auf dieses Ticket antworten?</h2>
     <div class="PageContent">
-        <form action="" method="post">
+        <form action="include/createReply.inc.php" method="post">
             <div class="mb-3">
                 <label for="reply" class="form-label">Antwort schreiben:</label>
                 <textarea class="form-control" name="reply" id="reply" rows="5"></textarea>
