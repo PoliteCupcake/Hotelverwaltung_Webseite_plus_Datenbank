@@ -1,5 +1,7 @@
 <?php
-session_start();
+if(!isset($_SESSION)){
+    session_start();
+}
 
 include_once "role.inc.php";
 
@@ -74,7 +76,7 @@ if($admin){
         }
         
 
-        createUserByAdmin($conn, $anrede, $firstname, $lastname, $email, $username, $pwd, $typ, $status);
+        createUserByAdmin($conn, $anrede, $lastname, $firstname, $email, $username, $pwd, $typ, $status);
     }
     else{
         header("location: ../index.php?currPage=create_user&Error=POSTnotSent");

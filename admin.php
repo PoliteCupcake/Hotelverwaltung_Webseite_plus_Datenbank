@@ -24,7 +24,7 @@ if($admin){
 
     <div class="PageContent">
         <h2>Liste aller registrierten User*innen</h2>
-        <table class="table table-bordered table-dark">
+        <table class="table table-bordered table-striped">
             <thead> <!-- Table head -->
                 <tr>
                     <th scope="col">Username</th>
