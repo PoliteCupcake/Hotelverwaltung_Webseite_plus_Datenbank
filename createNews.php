@@ -17,7 +17,6 @@ if(isset($_GET["error"])){
             break;
         case "POSTnotSent":echo '<p>POST Request ist schief gelaufen.</p>';
             break;
-        default: echo '<p>Nicht spezifizierter Error.</p>';
     }
 }
 if(isset($_GET["success"])){

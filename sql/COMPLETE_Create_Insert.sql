@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 19. Jan 2022 um 00:11
--- Server-Version: 10.4.22-MariaDB
--- PHP-Version: 8.1.1
+-- Erstellungszeit: 20. Jan 2022 um 04:58
+-- Server-Version: 10.4.21-MariaDB
+-- PHP-Version: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -44,12 +44,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`usersId`, `usersAnrede`, `usersNachname`, `usersVorname`, `usersEmail`, `usersPassword`, `usersUid`, `usersTyp`, `usersStatus`) VALUES
-(11, '', 'Ingo', 'Weigel', 'ingo@my-hotel.com', '$2y$10$9B8CAueXFqf5/ySwp6jbF.J13oNrQjX8bjBPYITyggB5pzSmDokPC', 'ingo', 'guest', 'active'),
-(12, '', 'Admin', 'istrator', 'admin@my-hotel.com', '$2y$10$LSYxEy/IBFGwbg/2O8Vv5uFXTvjVvlbAgbPGfzHu/XfaLm6/fs4VO', 'admin', 'guest', 'active'),
-(13, '', 'Gast', 'Gästin', 'guest@my-hotel.com', '$2y$10$58K.U9OyGAECCQDh8/VPge5Ck9Ap0uxFH59KnKcgeADPqKWq3wGGy', 'guest', 'guest', 'active'),
-(14, '', 'serviceTech', 'niker*in', 'service@my-hotel.com', '$2y$10$gpVChCSPpFySU3rhSZzrw.XzUiw6/alUe/F1mYk5SqFxOc/CelPxm', 'service', 'guest', 'active'),
-(15, '', 'Peter', 'Gamsjäger', 'peter@my-hotel.com', '$2y$10$T7KwOQWEEA3FnXontOhvGeu.qj2yjzs5EXaCI1UeNZPRTNF2/37FK', 'peter', 'guest', 'active'),
-(16, '', 'Simon', 'Biegler', 'simon@my-hotel.com', '$2y$10$br6CyfNQyVlw8g.sc5P/IehhBQYO/INvTIKFbk0DjqhEGHw4bwlEy', 'simon', 'guest', 'active');
+(22, 'Frau', 'Meister', 'Admin', 'admin@hotel.com', '$2y$10$thRfFkW3Bm8pEizBDRparu1dhq08vu/hYLfYn94eJ337O7vP.lUSe', 'admin', 'admin', 'active'),
+(23, '', 'Service', 'Techniker', 'Service@hotel.com', '$2y$10$iMgzEkm4PVGvWCAtVC5D3u5cWlbK/gQwPCPIMGg7dzHWvtA5R9nBu', 'service', 'serviceTech', 'active'),
+(24, '', 'Gästrich', 'Gast', 'Gast@email.com', '$2y$10$7NDRfoVwaof.jvM8t0NxHupUQuWAj1PHeLMOYgjd2doFaNyjnP.fC', 'gast', 'guest', 'active'),
+(25, 'Enby', 'Müller', 'Edit', 'edit@mail.com', '$2y$10$hhfRxlLpLLhzUK2n11E7CejsEteSG/98MtfcE/cAZNkcn9UPWEuhO', 'edit', 'guest', 'active');
 
 --
 -- Indizes der exportierten Tabellen
@@ -69,7 +67,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT für Tabelle `users`
 --
 ALTER TABLE `users`
-  MODIFY `usersId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `usersId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
