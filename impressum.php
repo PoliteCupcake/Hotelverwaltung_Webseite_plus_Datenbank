@@ -40,8 +40,8 @@
                 </div>
                 
                 <div class="col-md-6">
-                    <img src="#" class="" alt="Picture of founder">  
-                    <p class="text-center bg-dark bg-gradient text-light p-1">Missing picture!</p>   
+                    <img src="images/Gamsjager_Portrait.png" class="" alt="Picture of founder">  
+                    <p class="text-center bg-dark bg-gradient text-light p-1">Gamsjäger Peter</p>   
                 </div>
             </div>             
         </div>
