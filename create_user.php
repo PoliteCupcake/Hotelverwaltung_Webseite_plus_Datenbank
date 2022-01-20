@@ -1,4 +1,13 @@
-<?php 
+<?php
+
+if($admin)
+{
+
+$usersId = $_SESSION["userid"];
+include_once "include/dbaccess.inc.php";
+include_once "include/functions.inc.php";
+?>
+
     if(!isset($_SESSION)){
         session_start();
     }
@@ -65,3 +74,12 @@
 
         </form>
 </div>
+
+    <?php
+}
+else
+{
+    echo '<p class="text-center">Unberechtigter Zugriff. Bitte anmelden oder Zugriffsrechte prüfen.</p>';
+}
+
+?>

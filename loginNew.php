@@ -2,10 +2,16 @@
 
 
 <?php
-/*
-kann nur von Rolle: Anon gesehen werden
 
-*/
+if(!$anon)
+{
+    echo '<p class="text-center">Fehlermeldung: Sie sind bereits eingeloggt</p>';
+}
+else
+{
+
+
+
 
 if(!isset($_SESSION)){
     session_start();
@@ -47,7 +53,9 @@ if(!isset($_SESSION)){
 
 </div>
 
-
+<?php
+}
+    ?>
 
 
 

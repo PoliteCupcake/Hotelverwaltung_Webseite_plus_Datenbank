@@ -1,9 +1,12 @@
-/*
-Erreichbar nur für Admin
-kann News-Beiträge erstellen
-*/
 
-<?php ?>
+<?php
+if($admin)
+{
+
+$usersId = $_SESSION["userid"];
+include_once "include/dbaccess.inc.php";
+include_once "include/functions.inc.php";
+?>
 <div class="PageContent">
 <h2>News erstellen</h2>
 
@@ -29,3 +32,12 @@ kann News-Beiträge erstellen
 </div>
 <!-- Datum angeben-->
 </div>
+
+    <?php
+}
+else
+{
+    echo '<p class="text-center">Unberechtigter Zugriff. Bitte anmelden oder Zugriffsrechte prüfen.</p>';
+}
+
+?>

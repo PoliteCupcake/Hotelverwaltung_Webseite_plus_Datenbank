@@ -1,6 +1,4 @@
-/*
-Jede Rolle kann diese Seite aufrufen;
-*/
+
 <div class="PageWrap">
 
 

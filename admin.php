@@ -60,6 +60,6 @@ if($admin){
 <?php 
 }
 else{
-    echo '<p>Unberechtigter Zugriff. Bitte anmelden oder Zugriffsrechte prüfen.</p>';
+    echo '<p class="text-center">Unberechtigter Zugriff. Bitte anmelden oder Zugriffsrechte prüfen.</p>';
 }
 ?>
