@@ -4,10 +4,12 @@ include_once "include/dbaccess.inc.php";
 include_once "include/functions.inc.php";
 
 
+if (isset($_GET['id']) && ticketIdexists($conn,$_GET['id']))
+    {
+
     $stmt = mysqli_stmt_init($conn);
 
-    if(!mysqli_stmt_prepare($stmt, "SELECT * FROM tickets WHERE id = " . $_GET['id'] . ";"))
-    {
+    if (!mysqli_stmt_prepare($stmt, "SELECT * FROM tickets WHERE id = " . $_GET['id'] . ";")) {
         header("location: index.php?currPage=allTickets?error=ticketError");
         exit();
     }
@@ -15,13 +17,13 @@ include_once "include/functions.inc.php";
     $resultTicket = mysqli_stmt_get_result($stmt);
     $row = mysqli_fetch_assoc($resultTicket);
 
-    $ticket['id'            ] = $row["id"           ];
-    $ticket['title'         ] = $row["title"        ];
-    $ticket['img_path'      ] = $row["file_path"    ];
-    $ticket['comment'       ] = $row["comment"      ];
-    $ticket['user_id'       ] = $row["user_id"      ];
-    $ticket['ticketStatus'  ] = $row["ticketStatus" ];
-    $ticket['created'       ] = $row["created"      ];
+    $ticket['id'] = $row["id"];
+    $ticket['title'] = $row["title"];
+    $ticket['img_path'] = $row["file_path"];
+    $ticket['comment'] = $row["comment"];
+    $ticket['user_id'] = $row["user_id"];
+    $ticket['ticketStatus'] = $row["ticketStatus"];
+    $ticket['created'] = $row["created"];
 
     mysqli_stmt_close($stmt);
 
@@ -125,5 +127,13 @@ if($serviceTech || $admin || ($guest && $ticket['user_id'] === $_SESSION['userid
 </div>
 <?php } } else { ?>
     <p class="text-center">Unberechtigter Zugriff! Bitte anmelden oder Zugriffsrechte prüfen um Tickets zu sehen</p>
-<?php } ?>
+<?php }
+    }
+    else
+    {
+      echo '<p class="text-center">Ticket wurde in der Datenbank nicht gefunden</p>';
+    }
+
+
+?>
 
