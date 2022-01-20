@@ -57,7 +57,7 @@
             switch($_GET["access"]){
                 case "denied": echo '<p>Unberechtigter Zugriff. Bitte anmelden oder Zugriffsrechte prüfen.</p>';
                     break;
-                case "loggedin": echo '<p>Sie sind bereits eingeloggt.</p>'
+                case "loggedin": echo '<p>Sie sind bereits eingeloggt.</p>';
                     break;
             }
         }
