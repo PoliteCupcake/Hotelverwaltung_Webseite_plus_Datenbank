@@ -25,5 +25,6 @@ if($anon){
     }
 }
 else{
+    header("location: ../index.php?access=loggedin");
     echo '<p>Sie sind bereits eingeloggt.</p>';
 }

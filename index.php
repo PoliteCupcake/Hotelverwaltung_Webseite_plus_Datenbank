@@ -27,14 +27,13 @@
                     break;
                 case "profile": include 'profile.php';
                     break;
-                //DO NOT leave that in 
                 case "admin": include "admin.php";
                     break;
                 case "loginNew": include "loginNew.php";
                     break;
                 case "create_user": include "create_user.php";
                     break;
-                case "edit_user": include "edit_user.php"; // case: edit_user&
+                case "edit_user": include "edit_user.php"; 
                     break;
                 case "myTickets" : include "myTickets.php";
                     break;
@@ -44,14 +43,23 @@
                     break;
                 case "createNews": include "createNews.php";
                     break;
-                case "logout": include "logout.php"; break;
-                case "ticket": include "ticket.php"; break;
-
+                case "logout": include "logout.php"; 
+                    break;
+                case "ticket": include "ticket.php"; 
+                    break;
                 default: include "news.php";
             }
         }
         else{
             include "news.php";
+        }
+        if(isset($_GET["access"])){
+            switch($_GET["access"]){
+                case "denied": echo '<p>Unberechtigter Zugriff. Bitte anmelden oder Zugriffsrechte prüfen.</p>';
+                    break;
+                case "loggedin": echo '<p>Sie sind bereits eingeloggt.</p>'
+                    break;
+            }
         }
 
         ?>

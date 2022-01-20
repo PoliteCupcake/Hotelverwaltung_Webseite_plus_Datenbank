@@ -94,6 +94,7 @@ if($admin){
     }
 }
 else{
+    header("location: ../index.php?access=denied");
     echo '<p>Unberechtigter Zugriff. Bitte anmelden oder Zugriffsrechte prüfen.</p>';
 }
 
