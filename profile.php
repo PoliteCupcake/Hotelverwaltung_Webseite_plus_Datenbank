@@ -1,12 +1,12 @@
 
 <?php
 
-
+//Shows users profile
+//changes can be made
 
 if(!isset($_SESSION)){
     session_start();
 }
-
 
 // check user role closed at the end of the page
 if($guest || $serviceTech || $admin){

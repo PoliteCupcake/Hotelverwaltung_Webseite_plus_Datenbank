@@ -2,6 +2,8 @@
 include_once "role.inc.php";
 if($guest){
 
+    //Users can change
+    //email address here
     if(!isset($_SESSION)){
         session_start();
     }

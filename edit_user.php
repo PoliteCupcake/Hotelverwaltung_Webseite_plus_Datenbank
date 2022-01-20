@@ -1,8 +1,6 @@
 <?php
 
-
-
-
+//EditUser script for admin to alter user data
 
     if(!isset($_SESSION)){
         session_start();

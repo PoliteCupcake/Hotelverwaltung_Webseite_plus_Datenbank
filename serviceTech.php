@@ -2,6 +2,8 @@
 include_once "include/dbaccess.inc.php";
 include_once "include/functions.inc.php";
 
+//Lists all Tickets service tech can change status
+
 ?>
 
 

@@ -7,9 +7,12 @@ if($admin){
     }
     */
 
+    //Including functions and database access
     include_once "functions.inc.php";
     include_once "dbaccess.inc.php";
 
+    //Checks if input is an image
+    //possible to post news without a picture
     if(is_uploaded_file($_FILES["NewsImageUpload"]["tmp_name"])){
         $InputArr = array("file_path", "title", "article");
         $uploadOk = 1;
@@ -18,7 +21,7 @@ if($admin){
         $target_dir = "..\\NewsImages\\";
         $target_file = $target_dir . $uuid. "." . $imageFileType;
 
-        // Überprüfung ob Bild echtes Bild ist
+        // Checks if fileformat is an image
         if(isset($_POST["NewsSubmit"]))
         {
             $check = getimagesize($_FILES["NewsImageUpload"]["tmp_name"]);
@@ -60,7 +63,6 @@ if($admin){
                     }
                     else{
                         header("location: ../index.php?currPage=createNews&error=requiredMissing");
-                        //echo "Bitte Titel und Artikel ausfüllen!";
                     }
  
                 }

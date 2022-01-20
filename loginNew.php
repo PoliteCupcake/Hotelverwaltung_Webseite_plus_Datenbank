@@ -3,6 +3,9 @@
 
 <?php
 
+//Login script
+// Role check
+
 if(!$anon)
 {
     echo '<p class="text-center">Fehlermeldung: Sie sind bereits eingeloggt</p>';

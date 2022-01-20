@@ -17,7 +17,8 @@ if($guest || $serviceTech || $admin){
     include_once "functions.inc.php";
     include_once "dbaccess.inc.php";
 
-
+    //guidV4() generates a unique id for the uploaded image
+    //uploadOk flag set to 1
     $InputArr = array("file_path", "title", "comment");
     $uploadOk = 1;
     $uuid = guidv4();
@@ -28,7 +29,7 @@ if($guest || $serviceTech || $admin){
 
 
 
-    // Überprüfung ob Bild echtes Bild ist
+    // Check if file is an image
     if(isset($_POST["TicketSubmit"])) //submit to TicketSubmit
     {
         $check = getimagesize($_FILES["TicketUpload"]["tmp_name"]);
@@ -69,7 +70,7 @@ if($guest || $serviceTech || $admin){
                 $comment = $_POST["TicketComment"];
                 $userid = $_SESSION["userid"];
                 $ticketStatus = "open";
-                createTicket($conn, $filepath, $title, $comment, $userid, $ticketStatus);
+                createTicket($conn, $filepath, $title, $comment, $userid, $ticketStatus);                           //createTicket sends a sql-query to DB
                 header("location: ../index.php?currPage=createTicket&success");
             }
             else{

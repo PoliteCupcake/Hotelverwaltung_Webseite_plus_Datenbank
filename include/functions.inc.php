@@ -8,7 +8,7 @@ function checkInput($data){
     return $data;
 }
 
-
+//Input handling with regex
 function checkForAlph($input){
     return preg_match("/^[a-zA-Z]*$/", $input) ? "" : "Nur Buchstaben!";
 }
@@ -22,6 +22,8 @@ function checkEmail($input){
     return filter_var($input, FILTER_VALIDATE_EMAIL) ? "" : "Adresse ungültig!";
 }
 
+//Input handling for pwd input
+
 function pwdMatch($pwd, $pwdRepeat)
 {
     $result;
@@ -34,6 +36,7 @@ function pwdMatch($pwd, $pwdRepeat)
     return $result;
 }
 
+//If no error return input
 function SetValue($input, $error){
     if($error == ""){
         echo $input;
@@ -43,6 +46,7 @@ function SetValue($input, $error){
     }
 }
 
+//Error handling for input
 function signUpError($inputArr, $ErrorArr){
     foreach($inputArr as $input){
         if($ErrorArr[$input] != ""){
@@ -53,6 +57,8 @@ function signUpError($inputArr, $ErrorArr){
 
 // Server functions signup page -----------------------------------------------------
 // ----------------------------------------------------------------------------------
+
+//Checks if UID/nickname already exists
 function uidExists($conn, $username, $email)
 {
     $sql = "SELECT * FROM users WHERE usersUid = ? OR usersEmail = ?;";
@@ -81,6 +87,7 @@ function uidExists($conn, $username, $email)
     mysqli_stmt_close($stmt);
 }
 
+//Checks if UID already exists
 function OnlyUidExists($conn, $username)
 {
     $sql = "SELECT * FROM users WHERE usersUid = ?;";
@@ -107,7 +114,7 @@ function OnlyUidExists($conn, $username)
 
     mysqli_stmt_close($stmt);
 }
-
+//Checks if Email already exists
 function OnlyEmailExists($conn, $email)
 {
     $sql = "SELECT * FROM users WHERE usersEmail = ?;";
@@ -135,6 +142,7 @@ function OnlyEmailExists($conn, $email)
     mysqli_stmt_close($stmt);
 }
 
+//Creates an User and inserts into database
 function createUser($conn, $anrede, $lastname, $firstname, $email, $username, $pwd, $typ, $status)
 {
     $checkIfSame = uidExists($conn, $username, $email);
@@ -147,7 +155,7 @@ function createUser($conn, $anrede, $lastname, $firstname, $email, $username, $p
             exit();
         }
 
-        #Passwort wird gehashed
+        //PWD hashing
         $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
 
         mysqli_stmt_bind_param($stmt, "ssssssss", $anrede, $lastname, $firstname ,$email, $hashedPwd, $username, $typ, $status);
@@ -177,7 +185,7 @@ function createUserByAdmin($conn, $anrede, $lastname, $firstname, $email, $usern
             exit();
         }
 
-        #Passwort wird gehashed
+        #PWD is being hashed here
         $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
 
         mysqli_stmt_bind_param($stmt, "ssssssss", $anrede, $lastname, $firstname ,$email, $hashedPwd, $username, $typ, $status);
@@ -195,7 +203,7 @@ function createUserByAdmin($conn, $anrede, $lastname, $firstname, $email, $usern
 }
 // Login function  ------------------------------------------------------------------
 // ----------------------------------------------------------------------------------
-
+//Error handling for empty input
 function emptyInputLogin($username, $pwd)
 {
     $result;
@@ -212,12 +220,12 @@ function emptyInputLogin($username, $pwd)
     return $result;
 }
 
-
+// Login function
+//checks for username and pwd matching
+// starts a session
 function loginUser($conn, $username, $pwd)
 {
     $uidExists = uidExists($conn, $username, $username);
-
-
 
 
     if($uidExists === false)
@@ -262,7 +270,7 @@ function loginUser($conn, $username, $pwd)
     }
 }
 
-
+// Function to get all users data from database
 function getAllUsers($conn)
 {
     $stmt = mysqli_stmt_init($conn);
@@ -297,6 +305,7 @@ function getAllUsers($conn)
     return $allUsers;
 }
 
+//  get all tickets data from database
 function getAllTickets($conn)
 {
     $stmt = mysqli_stmt_init($conn);
@@ -330,6 +339,7 @@ function getAllTickets($conn)
     return $allTickets;
 }
 
+//Identifying ID in databse by usersUid/nickname
 function userUid_by_userId($conn, $userId)
 {
     $stmt = mysqli_stmt_init($conn);
@@ -361,6 +371,7 @@ function userUid_by_userId($conn, $userId)
 
 }
 
+//Identifying ID in databse by usersEmail/nickname
 function userEmail_by_userId($conn, $userId)
 {
     $stmt = mysqli_stmt_init($conn);
@@ -391,7 +402,7 @@ function userEmail_by_userId($conn, $userId)
 
 }
 
-
+// User data is altered here by admin
 function editUserByAdmin($conn, $userId, $pwdChanged, $anrede, $lastname, $firstname, $email, $username, $pwd, $typ, $status)
 {
 
@@ -437,7 +448,7 @@ function editUserByAdmin($conn, $userId, $pwdChanged, $anrede, $lastname, $first
     exit();
 }
 
-
+// Tickets are created and sent to database
 function createTicket($conn, $filepath, $title, $comment, $userid, $ticketStatus)
 {
 
@@ -510,7 +521,8 @@ function createTicket($conn, $file_path, $title, $comment, $user_id)
 }
 */
 
-
+//Function to create random generated string
+//used for imageupload
 function guidv4($data = null)
 {
     // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
@@ -548,7 +560,8 @@ function createNewsArticle($conn, $filepath, $newstitle, $article)
     
 }
 
-
+//Fetches all news ordered by date
+//and limit
 function getNews($conn, $limit)
 {
     $stmt = mysqli_stmt_init($conn);
@@ -694,7 +707,7 @@ function userLastName_by_userId($conn, $userId)
     return $lastname;
 }
 
-
+//Inserts a replymessage into db
 function createReply($conn, $ticketId, $reply)
 {
 

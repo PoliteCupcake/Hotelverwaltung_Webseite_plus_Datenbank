@@ -5,12 +5,12 @@ if(!isset($_SESSION)){
 
 include_once "role.inc.php";
 
+//User is created by admin here
 if($admin){
 
     include_once "functions.inc.php";
     include_once "dbaccess.inc.php";
 
-    //$inputArr = array($anrede, $firstname, $lastname, $email, $username, $pwd, $pwdRepeat);
     $stringInputArr = array("firstname", "lastname", "email", "username", "pwd", "pwdRepeat");
     $inputAlph = array("lastname", "firstname");
 
@@ -23,7 +23,7 @@ if($admin){
     } 
 
 
-
+    //Error handling for input
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         foreach($stringInputArr as $input){
             $UserData[$input] = checkInput($_POST[$input]);
@@ -55,7 +55,9 @@ if($admin){
     }
 
 
-
+    //Variables are submited
+    // and createUserByAdmin is executed
+    // if unseccsessfull -> Errorhandling
     if(isset($_POST["submit"]))
     {   
         $anrede = $_POST["anrede"];

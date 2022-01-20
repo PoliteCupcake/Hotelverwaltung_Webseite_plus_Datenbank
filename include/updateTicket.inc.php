@@ -1,5 +1,5 @@
 <?php
-// überprüfen auf role ??
+
 require_once 'dbaccess.inc.php';
 require_once 'functions.inc.php';
 

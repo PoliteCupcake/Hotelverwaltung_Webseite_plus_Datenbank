@@ -3,6 +3,11 @@
 include_once "include/dbaccess.inc.php";
 include_once "include/functions.inc.php";
 
+//Error handling for id and Role check
+//Displays ticket detail
+//Guest: sees own tickets can reopen them
+//Servicetech: can change to status, replies
+//Admin: can reopen tickets
 
 if (isset($_GET['id']) && ticketIdexists($conn,$_GET['id']))
     {

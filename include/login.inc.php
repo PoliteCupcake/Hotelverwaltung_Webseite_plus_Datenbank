@@ -1,5 +1,9 @@
 <?php
 include_once "role.inc.php";
+
+//Login script
+//Error handling
+
 if($anon){
 
     if (isset($_POST["submit"]))

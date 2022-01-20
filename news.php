@@ -5,8 +5,11 @@
 <div class="PageWrap">
     <h1>News</h1>
     <?php
+    //limits how many news entries
+    //are displayed
     $limitednews = getNews($conn, 2);
     foreach($limitednews as $news){
+        //news without image
         if($news["img_path"] == "NOIMAGE"){
             echo '<div class="PageContent NewsContent">';
             echo    '<h2 class="display-5">' . $news["title"] . '</h2>';

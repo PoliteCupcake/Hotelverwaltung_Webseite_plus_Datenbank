@@ -1,4 +1,6 @@
 <?php
+
+//Only admins are allowed else error message
 if($admin){
 
     $usersId = $_SESSION["userid"];
@@ -40,6 +42,7 @@ if($admin){
             <tbody>
 
              <?php
+                //List of all existing users
                  $allUsers = getAllUsers($conn);
 		        foreach($allUsers as $user)
                 {

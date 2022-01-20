@@ -1,4 +1,4 @@
-
+<!--Checks roles in order to display the right options -->
 <header class="text-center bg-gradient">
     <img id="headerImg" class="img-fluid " src="images/header_img.jpg" alt="Picture of a big pool with little huts">
 </header>

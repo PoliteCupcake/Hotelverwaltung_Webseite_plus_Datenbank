@@ -1,5 +1,7 @@
 <?php
 
+// Shows all personal tickets
+
 include_once "include/dbaccess.inc.php";
 include_once "include/functions.inc.php";
 

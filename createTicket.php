@@ -1,6 +1,9 @@
 <div class="PageWrap">
 
 <?php
+
+//All logged in users can created a ticket
+
 if($guest || $admin || $serviceTech)
 {
 

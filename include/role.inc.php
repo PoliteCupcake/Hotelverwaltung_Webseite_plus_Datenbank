@@ -1,4 +1,6 @@
 <?php
+//Flagging for Roles
+
 	$anon        = false;
 	$guest       = false;
 	$serviceTech = false;

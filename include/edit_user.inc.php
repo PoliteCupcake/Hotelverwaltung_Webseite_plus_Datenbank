@@ -5,9 +5,8 @@ if($admin){
     include_once "functions.inc.php";
     include_once "dbaccess.inc.php";
 
+    //Userdata is manipulated by admin here
 
-
-    //$inputArr = array($anrede, $firstname, $lastname, $email, $username, $pwd, $pwdRepeat);
     $stringInputArr = array("firstname", "lastname", "email", "username"); // check these values for errors
     $inputAlph = array("lastname", "firstname");
 
@@ -40,6 +39,7 @@ if($admin){
     }
     $_SESSION["signUpErrors"] = $ErrorArr;
 
+    //If is not altered by admin pw remains the same
     if(!empty($_POST["pwd"])){
         if(!pwdMatch($_POST["pwd"], $_POST["pwdRepeat"])){
             header("location: ../index.php?currPage=edit_user&usersId=". $existingUsersId ."&inputError=pwdNotMatching");
@@ -77,7 +77,8 @@ if($admin){
             $status = "inactive";
         }
 
-
+        //Similar to pwd handling (line 42) checks if values
+        // was changed by admin at all
         if(userUid_by_userId($conn, $existingUsersId) !== $_POST["username"]){
             if(!OnlyUidExists($conn, $username)){
                 header("location: ../index.php?currPage=edit_user&usersId=". $existingUsersId ."&inputError=usernameAlreadyTaken");

@@ -2,6 +2,8 @@
 
 <?php
 
+//signup page
+
     if(!isset($_SESSION)){
         session_start();
     }

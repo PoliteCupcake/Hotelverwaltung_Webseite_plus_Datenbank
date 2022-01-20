@@ -1,13 +1,13 @@
 <?php
 
-#Zeigt Details der Tickets an
+// Shows all tickets only accessible by servicetechs and admins
 
 include_once "include/dbaccess.inc.php";
 include_once "include/functions.inc.php";
 
 if(isset($_SESSION["userid"]) )
 {
-    if($serviceTech || $admin)   #zeigt alle tickets an Titel Status Datum
+    if($serviceTech || $admin)
     {
 ?>
         <div class="PageWrap">

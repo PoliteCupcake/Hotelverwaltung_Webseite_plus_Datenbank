@@ -1,5 +1,9 @@
 
 <?php
+
+//Only accessible for admins
+//admin creates news  here
+
 if($admin)
 {
 
